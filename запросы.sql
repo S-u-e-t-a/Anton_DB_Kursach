@@ -15,15 +15,23 @@ ID заказа = autoincrement
 --заказ закупок
 UPDATE contains SET Cont_amount = @a
 WHERE Mat_ID = @b AND St_ID = @c;
-command.Parameters.Add("@a", MySqlDbType.VarChar).Value = numericUpDownMaterialID;
+command.Parameters.Add("@a", MySqlDbType.Int32).Value = numericUpDownMaterialID;
 command.Parameters.Add("@b", MySqlDbType.Int32).Value = numericUpDownStorageID;
 command.Parameters.Add("@c", MySqlDbType.Int32).Value = numericUpDownAmount;
 --Заказ закупок как бы обновляет таблицу запасов, увеличивая кол-во имеющихся товаров создавая иллюзиб закупки
 --необходимо ввести проверку на вводимое кол-во продукции (кол-во после закупки > запасов)
 
---заказ перемещения. Предполагает выравнивание запасов одного и того же продукта на складах
---для этого вероятно стоит организовать процедуру для рассчета среднего арифметического всех запасов данного продукта на всех складах
---и затем обновлять таблицу запасов, "укладывая" в каждый склад ~равное(+/- 1) кол-во продуктов с одинаковым ID
+--заказ перемещения.
+int amount1 = SELECT Cont_amount FROM contains WHERE St_ID = @b AND Mat_ID = @a;
+int amount2 = SELECT Cont_amount FROM contains WHERE St_ID = @c AND Mat_ID = @a;
+amount1 = amount1 + numericUpDownAmount.Value;
+amount2 = amount2 - numericUpDownAmount.Value;
+UPDATE contains SET Cont_amount = amount1 WHERE St_ID = @b AND Mat_ID = @a;
+UPDATE contains SET Cont_amount = amount2 WHERE St_ID = @c AND Mat_ID = @a;
+command.Parameters.Add("@a", MySqlDbType.Int32).Value = numericUpDownMaterialID;
+command.Parameters.Add("@b", MySqlDbType.Int32).Value = numericUpDownStorageIDTo;
+command.Parameters.Add("@с", MySqlDbType.Int32).Value = numericUpDownStorageIDFrom;
+command.Parameters.Add("@d", MySqlDbType.Int32).Value = numericUpDownAmount;
 
 --Управление РЦ.
 UPDATE factory SET Fact_status = @a, Fact_time = @b
