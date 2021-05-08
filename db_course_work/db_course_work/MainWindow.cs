@@ -16,11 +16,10 @@ namespace db_course_work
             dataGridView1.AllowUserToAddRows = false;
         }
 
-    }
 
-    readonly DB db = new DB();
+        readonly DB db = new DB();
         MySqlDataReader reader;
-                
+
         private void ButtonNomenclature_Click(object sender, EventArgs e)
         {
             dataGridView1.Columns.Clear();

@@ -16,51 +16,58 @@ namespace db_course_work
         {
             try
             {
-                db.OpenConnection();
-                int amountFrom = 0;
-                int amountTo = 0;
-
-                MySqlCommand command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
-                command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageIDFrom.Value;
-                command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownAmount.Value;
-
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                if (!(numericUpDownStorageIDFrom.Value == numericUpDownStorageIDTo.Value))
                 {
-                    amountFrom = (int)reader["Cont_amount"];
+                    db.OpenConnection();
+                    int amountFrom = 0;
+                    int amountTo = 0;
+
+                    MySqlCommand command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
+                    command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownStorageIDFrom.Value;
+                    command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        amountFrom = (int)reader["Cont_amount"];
+                    }
+                    reader.Close();
+
+                    command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
+                    command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownStorageIDTo.Value;
+                    command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        amountTo = (int)reader["Cont_amount"];
+                    }
+                    reader.Close();
+
+                    numericUpDownAmount.Maximum = amountFrom;
+
+                    command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
+                    command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
+                    command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownStorageIDFrom.Value;
+                    command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = amountFrom - numericUpDownAmount.Value;
+                    command.Connection = db.GetConnection();
+                    command.ExecuteNonQuery();
+
+                    command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
+                    command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
+                    command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownStorageIDTo.Value;
+                    command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = amountTo + numericUpDownAmount.Value;
+                    command.Connection = db.GetConnection();
+                    command.ExecuteNonQuery();
+                    db.CloseConnection();
+                    Close();
                 }
-                reader.Close();
-
-                command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
-                command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageIDTo.Value;
-                command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownAmount.Value;
-
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                else
                 {
-                    amountTo = (int)reader["Cont_amount"];
+                    MessageBox.Show("Перемещения возможны между различными складами", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
-                reader.Close();
-
-                numericUpDownAmount.Maximum = amountFrom;
-
-                command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
-                command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
-                command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageIDFrom.Value;
-                command.Parameters.Add("@stor", MySqlDbType.Int32).Value = amountFrom - numericUpDownAmount.Value;
-                command.Connection = db.GetConnection();
-                command.ExecuteNonQuery();
-
-                command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
-                command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
-                command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageIDTo.Value;
-                command.Parameters.Add("@stor", MySqlDbType.Int32).Value = amountTo + numericUpDownAmount.Value;
-                command.Connection = db.GetConnection();
-                command.ExecuteNonQuery();
-                db.CloseConnection();
-                Close();
 
             }
             catch (MySqlException ex)

@@ -34,9 +34,10 @@ namespace db_course_work
                 reader.Close();
 
                 command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
-                command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
+                command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
                 command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageID.Value;
-                command.Parameters.Add("@stor", MySqlDbType.Int32).Value = oldAmount + numericUpDownAmount.Value;
+                oldAmount += Convert.ToInt32(numericUpDownAmount.Value);
+                command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = oldAmount;
                 command.Connection = db.GetConnection();
                 command.ExecuteNonQuery();
                 db.CloseConnection();
