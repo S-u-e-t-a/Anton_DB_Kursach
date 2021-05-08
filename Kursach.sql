@@ -1,6 +1,6 @@
 ﻿/*
 Created: 05.04.2021
-Modified: 19.04.2021
+Modified: 08.05.2021
 Project: kursach
 Model: MySQL 8.0
 Database: MySQL 8.0
@@ -12,19 +12,16 @@ Database: MySQL 8.0
 
 CREATE TABLE `Custom`
 (
-  `Cus_ID` Int NOT NULL,
-  `Cus_status` Char(20) NOT NULL,
+  `Cus_ID` Int NOT NULL AUTO_INCREMENT,
+  `Cus_status` Bool NOT NULL,
   `Cus_date` Datetime NOT NULL,
-  `Cus_cost` Int NOT NULL,
   `Cus_amount` Int NOT NULL,
-  `Mat_ID` Int NOT NULL
+  `Mat_ID` Int NOT NULL,
+  PRIMARY KEY (`Cus_ID`)
 )
 ;
 
 CREATE INDEX `IX_Relationship8` ON `Custom` (`Mat_ID`)
-;
-
-ALTER TABLE `Custom` ADD PRIMARY KEY (`Cus_ID`)
 ;
 
 -- Table Material
@@ -65,7 +62,7 @@ CREATE TABLE `Contains`
 (
   `Mat_ID` Int NOT NULL,
   `St_ID` Int NOT NULL,
-  `Cont_amount` Int NOT NULL
+  `Cont_amount` Int
 )
 ;
 
@@ -114,6 +111,7 @@ ALTER TABLE `Specification` ADD PRIMARY KEY (`Spec_ID`)
 CREATE TABLE `Comp_spec`
 (
   `Comp_ID` Int NOT NULL,
+  `Comp_desc` Char(25) NOT NULL,
   `Operation_ID` Int NOT NULL,
   `Comp_amount` Int NOT NULL,
   `Spec_ID` Int NOT NULL,
@@ -144,6 +142,7 @@ ALTER TABLE `Technological_map` ADD PRIMARY KEY (`Map_ID`)
 CREATE TABLE `Comp_Map`
 (
   `Oper_ID` Int NOT NULL,
+  `Oper_desc` Char(25) NOT NULL,
   `Oper_time` Time NOT NULL,
   `Next_oper_ID` Int NOT NULL,
   `Map_ID` Int NOT NULL,

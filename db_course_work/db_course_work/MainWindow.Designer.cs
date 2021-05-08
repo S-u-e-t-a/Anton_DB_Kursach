@@ -44,6 +44,8 @@
             this.buttonSaveData = new System.Windows.Forms.Button();
             this.groupBoxWatch = new System.Windows.Forms.GroupBox();
             this.buttonInfo = new System.Windows.Forms.Button();
+            this.buttonUsing = new System.Windows.Forms.Button();
+            this.buttonDoneGoods = new System.Windows.Forms.Button();
             this.groupBoxFunc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBoxWatch.SuspendLayout();
@@ -51,6 +53,8 @@
             // 
             // groupBoxFunc
             // 
+            this.groupBoxFunc.Controls.Add(this.buttonDoneGoods);
+            this.groupBoxFunc.Controls.Add(this.buttonUsing);
             this.groupBoxFunc.Controls.Add(this.buttonManageFactory);
             this.groupBoxFunc.Controls.Add(this.buttonShake);
             this.groupBoxFunc.Controls.Add(this.buttonImport);
@@ -71,6 +75,7 @@
             this.buttonManageFactory.TabIndex = 8;
             this.buttonManageFactory.Text = "Управление РЦ";
             this.buttonManageFactory.UseVisualStyleBackColor = true;
+            this.buttonManageFactory.Click += new System.EventHandler(this.buttonManageFactory_Click);
             // 
             // buttonShake
             // 
@@ -80,6 +85,7 @@
             this.buttonShake.TabIndex = 6;
             this.buttonShake.Text = "Заказ перемещения";
             this.buttonShake.UseVisualStyleBackColor = true;
+            this.buttonShake.Click += new System.EventHandler(this.buttonShake_Click);
             // 
             // buttonImport
             // 
@@ -89,6 +95,7 @@
             this.buttonImport.TabIndex = 5;
             this.buttonImport.Text = "Заказ закупок";
             this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // ButtonAddPurchase
             // 
@@ -178,7 +185,7 @@
             this.buttonDeleteData.TabIndex = 8;
             this.buttonDeleteData.Text = "Удалить кортеж";
             this.buttonDeleteData.UseVisualStyleBackColor = true;
-            this.buttonDeleteData.Click += new System.EventHandler(this.buttonDeleteData_Click);
+            this.buttonDeleteData.Visible = false;
             // 
             // buttonSaveData
             // 
@@ -189,7 +196,7 @@
             this.buttonSaveData.TabIndex = 9;
             this.buttonSaveData.Text = "Сохранить изменения";
             this.buttonSaveData.UseVisualStyleBackColor = true;
-            this.buttonSaveData.Click += new System.EventHandler(this.buttonSaveData_Click);
+            this.buttonSaveData.Visible = false;
             // 
             // groupBoxWatch
             // 
@@ -217,6 +224,24 @@
             this.buttonInfo.Text = "?";
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
+            // 
+            // buttonUsing
+            // 
+            this.buttonUsing.Location = new System.Drawing.Point(177, 89);
+            this.buttonUsing.Name = "buttonUsing";
+            this.buttonUsing.Size = new System.Drawing.Size(193, 55);
+            this.buttonUsing.TabIndex = 9;
+            this.buttonUsing.Text = "Журнал использования";
+            this.buttonUsing.UseVisualStyleBackColor = true;
+            // 
+            // buttonDoneGoods
+            // 
+            this.buttonDoneGoods.Location = new System.Drawing.Point(376, 89);
+            this.buttonDoneGoods.Name = "buttonDoneGoods";
+            this.buttonDoneGoods.Size = new System.Drawing.Size(179, 55);
+            this.buttonDoneGoods.TabIndex = 10;
+            this.buttonDoneGoods.Text = "Журнал выхода\r\n";
+            this.buttonDoneGoods.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -257,6 +282,8 @@
         private System.Windows.Forms.Button buttonSaveData;
         private System.Windows.Forms.GroupBox groupBoxWatch;
         private System.Windows.Forms.Button buttonInfo;
+        private System.Windows.Forms.Button buttonDoneGoods;
+        private System.Windows.Forms.Button buttonUsing;
     }
 }
 

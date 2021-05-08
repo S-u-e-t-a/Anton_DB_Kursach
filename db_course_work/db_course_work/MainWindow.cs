@@ -1,33 +1,22 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace db_course_work
 {
     public partial class MainWindow : Form
     {
-        private string currentTable;
-        private string currentID;
         public MainWindow()
         {
             InitializeComponent();
             MaximizeBox = false;
         }
 
-        DB db = new DB();
-        DataTable table = new DataTable();
+        readonly DB db = new DB();
         MySqlDataReader reader;
-
-        private void ButtonAddPurchase_Click(object sender, EventArgs e)
-        {
-
-        }
-
+                
         private void ButtonNomenclature_Click(object sender, EventArgs e)
         {
-            currentTable = "material";
-            currentID = "Mat_ID";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM material");
             db.OpenConnection();
@@ -48,8 +37,6 @@ namespace db_course_work
 
         private void ButtonStocks_Click(object sender, EventArgs e)
         {
-            currentTable = "contains";
-            currentID = "Mat_ID";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM contains");
             db.OpenConnection();
@@ -71,8 +58,6 @@ namespace db_course_work
 
         private void buttonCustoms_Click(object sender, EventArgs e)
         {
-            currentTable = "custom";
-            currentID = "Cus_ID";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM custom");
             db.OpenConnection();
@@ -81,7 +66,6 @@ namespace db_course_work
             dataGridView1.Columns.Add("Cus_ID", "ID Заказа"); dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Columns.Add("Cus_status", "Статус");
             dataGridView1.Columns.Add("Cus_date", "Дата");
-            dataGridView1.Columns.Add("Cus_cost", "Стоимость");
             dataGridView1.Columns.Add("Cus_amount", "Количество");
             dataGridView1.Columns.Add("Mat_ID", "ID Продукта");
             while (reader.Read())
@@ -89,7 +73,6 @@ namespace db_course_work
                 dataGridView1.Rows.Add(reader["Cus_ID"].ToString(),
                     reader["Cus_status"].ToString(),
                     reader["Cus_date"].ToString(),
-                    reader["Cus_cost"].ToString(),
                     reader["Cus_amount"].ToString(),
                     reader["Mat_ID"].ToString());
             }
@@ -99,8 +82,6 @@ namespace db_course_work
 
         private void buttonFactory_Click(object sender, EventArgs e)
         {
-            currentTable = "factory";
-            currentID = "Fact_ID";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM factory");
             db.OpenConnection();
@@ -122,8 +103,6 @@ namespace db_course_work
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
-            currentTable = "group_change";
-            currentID = "Gr_ID";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM group_change");
             db.OpenConnection();
@@ -143,8 +122,6 @@ namespace db_course_work
 
         private void buttonStore_Click(object sender, EventArgs e)
         {
-            currentTable = "storage";
-            currentID = "St_ID";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM storage");
             db.OpenConnection();
@@ -162,43 +139,68 @@ namespace db_course_work
             db.CloseConnection();
         }
 
-        private void buttonSaveData_Click(object sender, EventArgs e)
-        {
-            db.OpenConnection();
-            MySqlCommand command = new MySqlCommand("DELETE FROM factory", db.GetConnection());
-            command.ExecuteNonQuery();
-            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
-            {
-                command = new MySqlCommand("INSERT INTO factory VALUES (@a, @b, @c )", db.GetConnection());
-                command.Parameters.Add("@a", MySqlDbType.Int32).Value = dataGridView1.Rows[i].Cells[0].Value;
-                command.Parameters.Add("@b", MySqlDbType.VarChar).Value = dataGridView1.Rows[i].Cells[1].Value;
-                command.Parameters.Add("@c", MySqlDbType.VarChar).Value = dataGridView1.Rows[i].Cells[2].Value;
-                command.ExecuteNonQuery();
-            }
-            db.CloseConnection();
-        }
+        #region buttons save & delete
+        //private void buttonSaveData_Click(object sender, EventArgs e)
+        //{
+        //    db.OpenConnection();
+        //    MySqlCommand command = new MySqlCommand("DELETE FROM factory", db.GetConnection());
+        //    command.ExecuteNonQuery();
+        //    for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+        //    {
+        //        command = new MySqlCommand("INSERT INTO factory VALUES (@a, @b, @c )", db.GetConnection());
+        //        command.Parameters.Add("@a", MySqlDbType.Int32).Value = dataGridView1.Rows[i].Cells[0].Value;
+        //        command.Parameters.Add("@b", MySqlDbType.VarChar).Value = dataGridView1.Rows[i].Cells[1].Value;
+        //        command.Parameters.Add("@c", MySqlDbType.VarChar).Value = dataGridView1.Rows[i].Cells[2].Value;
+        //        command.ExecuteNonQuery();
+        //    }
+        //    db.CloseConnection();
+        //}
 
-        private void buttonDeleteData_Click(object sender, EventArgs e)
-        {
-            string index = dataGridView1.CurrentCell.Value.ToString();
-            if (MessageBox.Show("Удалить кортеж? ", "Удаление кортежа", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                db.OpenConnection();
-                MySqlCommand command = new MySqlCommand("DELETE FROM factory WHERE Fact_ID = @id", db.GetConnection());
-                command.Parameters.Add("@id", MySqlDbType.VarChar).Value = index;
-                command.ExecuteNonQuery();
+        //private void buttonDeleteData_Click(object sender, EventArgs e)
+        //{
+        //    string index = dataGridView1.CurrentCell.Value.ToString();
+        //    if (MessageBox.Show("Удалить кортеж? ", "Удаление кортежа", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+        //    {
+        //        db.OpenConnection();
+        //        MySqlCommand command = new MySqlCommand("DELETE FROM factory WHERE Fact_ID = @id", db.GetConnection());
+        //        command.Parameters.Add("@id", MySqlDbType.VarChar).Value = index;
+        //        command.ExecuteNonQuery();
 
-                buttonFactory_Click(null, null);
+        //        buttonFactory_Click(null, null);
 
-                db.CloseConnection();
-            }
-        }
+        //        db.CloseConnection();
+        //    }
+        //}
+        #endregion
 
         private void buttonInfo_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Можно посмотреть содержимое всех таблиц\n" +
                 "Можно удалить и добавить информацию в таблицу РЦ");
         }
-    }
 
+        private void buttonImport_Click(object sender, EventArgs e)
+        {
+            var import = new Import();
+            import.ShowDialog();
+        }
+
+        private void buttonShake_Click(object sender, EventArgs e)
+        {
+            var moving = new Moving();
+            moving.ShowDialog();
+        }
+
+        private void ButtonAddPurchase_Click(object sender, EventArgs e)
+        {
+            var order = new Order();
+            order.ShowDialog();
+        }
+
+        private void buttonManageFactory_Click(object sender, EventArgs e)
+        {
+            var factory = new Factory();
+            factory.ShowDialog();
+        }
+    }
 }
