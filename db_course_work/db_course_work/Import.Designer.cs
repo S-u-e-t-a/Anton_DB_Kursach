@@ -150,6 +150,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Import";
             this.Text = "Заказ закупок";
+            this.Load += new System.EventHandler(this.Import_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStorageID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaterialID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmount)).EndInit();

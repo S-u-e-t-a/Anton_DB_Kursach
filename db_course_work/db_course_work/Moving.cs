@@ -12,6 +12,7 @@ namespace db_course_work
         }
         readonly DB db = new DB();
         private MySqlDataReader reader;
+        MySqlCommand command;
         private void buttonEnterMoving_Click(object sender, EventArgs e)
         {
             try
@@ -22,7 +23,7 @@ namespace db_course_work
                     int amountFrom = 0;
                     int amountTo = 0;
 
-                    MySqlCommand command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
+                    command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
                     command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownStorageIDFrom.Value;
                     command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
 
@@ -74,6 +75,35 @@ namespace db_course_work
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Moving_Load(object sender, EventArgs e)
+        {
+            db.OpenConnection();
+
+            int сountStorage = 0;
+            int сountMaterials = 0;
+
+            command = new MySqlCommand("SELECT COUNT(St_ID) FROM storage", db.GetConnection());
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                сountStorage = Convert.ToInt32(reader["COUNT(St_ID)"]);
+            }
+            reader.Close();
+            numericUpDownStorageIDFrom.Maximum = сountStorage;
+            numericUpDownStorageIDTo.Maximum = сountStorage;
+
+            command = new MySqlCommand("SELECT MAX(Mat_ID) FROM material", db.GetConnection());
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                сountMaterials = Convert.ToInt32(reader["MAX(Mat_ID)"]);
+            }
+            reader.Close();
+            numericUpDownMaterialID.Maximum = сountMaterials;
+
+            db.CloseConnection();
         }
     }
 }

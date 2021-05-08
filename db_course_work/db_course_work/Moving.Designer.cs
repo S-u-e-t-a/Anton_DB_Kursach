@@ -188,6 +188,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Moving";
             this.Text = "Перемещение";
+            this.Load += new System.EventHandler(this.Moving_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaterialID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStorageIDFrom)).EndInit();

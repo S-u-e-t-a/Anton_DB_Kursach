@@ -16,26 +16,12 @@ namespace db_course_work
             MaterialGrid.AllowUserToAddRows = false;
         }
         readonly DB db = new DB();
-        MySqlDataReader reader;
+        MySqlCommand command;
         private void buttonEnterImport_Click(object sender, EventArgs e)
         {
             try
             {
                 db.OpenConnection();
-
-                int сountMaterials = 0;
-                var command = new MySqlCommand("SELECT COUNT(Mat_ID) FROM material", db.GetConnection());
-
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    сountMaterials = (int)reader["COUNT(Mat_ID)"];
-                }
-                reader.Close();
-
-                numericUpDownMaterialID.Maximum = сountMaterials;
-
                 command = new MySqlCommand("INSERT INTO custom (Mat_ID, Cus_amount, Cus_status, Cus_date) VALUES (@id, @amount, @status, @date)", db.GetConnection());
                 command.Parameters.Add("@id", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
                 command.Parameters.Add("@amount", MySqlDbType.Int32).Value = numericUpDownAmount.Value;
@@ -58,7 +44,7 @@ namespace db_course_work
             MySqlDataReader reader;
 
             MaterialGrid.Columns.Clear();
-            MySqlCommand command = new MySqlCommand("SELECT Mat_ID, Mat_description FROM material");
+            command = new MySqlCommand("SELECT Mat_ID, Mat_description FROM material");
             db.OpenConnection();
             command.Connection = db.GetConnection();
             reader = command.ExecuteReader();
@@ -69,6 +55,19 @@ namespace db_course_work
                 MaterialGrid.Rows.Add(reader["Mat_ID"].ToString(), reader["Mat_description"].ToString());
             }
             reader.Close();
+
+            int сountMaterials = 0;
+            command = new MySqlCommand("SELECT MAX(Mat_ID) FROM material", db.GetConnection());
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                сountMaterials = Convert.ToInt32(reader["MAX(Mat_ID)"]);
+            }
+            reader.Close();
+
+            numericUpDownMaterialID.Maximum = сountMaterials;
             db.CloseConnection();
         }
     }
