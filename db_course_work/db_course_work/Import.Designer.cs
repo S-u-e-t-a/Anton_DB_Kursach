@@ -44,6 +44,11 @@
             // 
             this.numericUpDownStorageID.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownStorageID.Location = new System.Drawing.Point(34, 35);
+            this.numericUpDownStorageID.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.numericUpDownStorageID.Minimum = new decimal(new int[] {
             1,
             0,
@@ -62,19 +67,14 @@
             // 
             this.numericUpDownMaterialID.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownMaterialID.Location = new System.Drawing.Point(34, 92);
-            this.numericUpDownMaterialID.Minimum = new decimal(new int[] {
-            1,
+            this.numericUpDownMaterialID.Maximum = new decimal(new int[] {
+            13,
             0,
             0,
             0});
             this.numericUpDownMaterialID.Name = "numericUpDownMaterialID";
             this.numericUpDownMaterialID.Size = new System.Drawing.Size(120, 29);
             this.numericUpDownMaterialID.TabIndex = 1;
-            this.numericUpDownMaterialID.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // numericUpDownAmount
             // 
@@ -113,7 +113,7 @@
             this.label2.Size = new System.Drawing.Size(108, 22);
             this.label2.TabIndex = 4;
             this.label2.Text = "ID Материала";
-           // 
+            // 
             // label3
             // 
             this.label3.AutoSize = true;

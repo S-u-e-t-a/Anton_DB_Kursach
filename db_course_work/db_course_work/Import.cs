@@ -19,8 +19,9 @@ namespace db_course_work
         {
             try
             {
+                db.OpenConnection();
                 int oldAmount = 0;
-                MySqlCommand command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor");
+                MySqlCommand command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
                 command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageID.Value;
                 command.Parameters.Add("@stor", MySqlDbType.Int32).Value = numericUpDownAmount.Value;
 
@@ -32,18 +33,19 @@ namespace db_course_work
                 }
                 reader.Close();
 
-                command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor");
+                command = new MySqlCommand("UPDATE contains SET Cont_amount = @newAm WHERE Mat_ID = @mat AND St_ID = @stor", db.GetConnection());
                 command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
                 command.Parameters.Add("@mat", MySqlDbType.Int32).Value = numericUpDownStorageID.Value;
                 command.Parameters.Add("@stor", MySqlDbType.Int32).Value = oldAmount + numericUpDownAmount.Value;
-                db.OpenConnection();
                 command.Connection = db.GetConnection();
                 command.ExecuteNonQuery();
                 db.CloseConnection();
-            }
-            catch(MySqlException)
-            {
+                Close();
 
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

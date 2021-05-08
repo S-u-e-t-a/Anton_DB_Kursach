@@ -10,9 +10,15 @@ namespace db_course_work
         {
             InitializeComponent();
             MaximizeBox = false;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AllowUserToAddRows = false;
         }
 
-        readonly DB db = new DB();
+    }
+
+    readonly DB db = new DB();
         MySqlDataReader reader;
                 
         private void ButtonNomenclature_Click(object sender, EventArgs e)

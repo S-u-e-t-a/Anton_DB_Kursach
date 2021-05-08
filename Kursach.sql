@@ -75,7 +75,7 @@ CREATE TABLE `Factory`
 (
   `Fact_ID` Int NOT NULL,
   `Fact_status` Char(20) NOT NULL,
-  `Fact_time` Time NOT NULL
+  `Fact_time` Int NOT NULL
 )
 ;
 
@@ -143,7 +143,7 @@ CREATE TABLE `Comp_Map`
 (
   `Oper_ID` Int NOT NULL,
   `Oper_desc` Char(25) NOT NULL,
-  `Oper_time` Time NOT NULL,
+  `Oper_time` Int NOT NULL,
   `Next_oper_ID` Int NOT NULL,
   `Map_ID` Int NOT NULL,
   `Fact_ID` Int NOT NULL

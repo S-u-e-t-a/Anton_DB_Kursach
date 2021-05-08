@@ -33,8 +33,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDownAmount = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownMaterialID = new System.Windows.Forms.NumericUpDown();
+            this.MaterialGrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaterialID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaterialGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonEnterImport
@@ -90,25 +92,30 @@
             // 
             this.numericUpDownMaterialID.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownMaterialID.Location = new System.Drawing.Point(12, 41);
-            this.numericUpDownMaterialID.Minimum = new decimal(new int[] {
-            1,
+            this.numericUpDownMaterialID.Maximum = new decimal(new int[] {
+            13,
             0,
             0,
             0});
             this.numericUpDownMaterialID.Name = "numericUpDownMaterialID";
             this.numericUpDownMaterialID.Size = new System.Drawing.Size(120, 29);
             this.numericUpDownMaterialID.TabIndex = 8;
-            this.numericUpDownMaterialID.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            // 
+            // MaterialGrid
+            // 
+            this.MaterialGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MaterialGrid.Location = new System.Drawing.Point(144, 18);
+            this.MaterialGrid.Name = "MaterialGrid";
+            this.MaterialGrid.RowHeadersVisible = false;
+            this.MaterialGrid.Size = new System.Drawing.Size(240, 150);
+            this.MaterialGrid.TabIndex = 14;
             // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 193);
+            this.ClientSize = new System.Drawing.Size(396, 193);
+            this.Controls.Add(this.MaterialGrid);
             this.Controls.Add(this.buttonEnterImport);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -117,8 +124,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Order";
             this.Text = "Заказ";
+            this.Load += new System.EventHandler(this.Order_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaterialID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaterialGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +140,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDownAmount;
         private System.Windows.Forms.NumericUpDown numericUpDownMaterialID;
+        private System.Windows.Forms.DataGridView MaterialGrid;
     }
 }

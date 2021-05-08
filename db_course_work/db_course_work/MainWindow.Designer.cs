@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBoxFunc = new System.Windows.Forms.GroupBox();
+            this.buttonDoneGoods = new System.Windows.Forms.Button();
+            this.buttonUsing = new System.Windows.Forms.Button();
             this.buttonManageFactory = new System.Windows.Forms.Button();
             this.buttonShake = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
@@ -44,8 +46,6 @@
             this.buttonSaveData = new System.Windows.Forms.Button();
             this.groupBoxWatch = new System.Windows.Forms.GroupBox();
             this.buttonInfo = new System.Windows.Forms.Button();
-            this.buttonUsing = new System.Windows.Forms.Button();
-            this.buttonDoneGoods = new System.Windows.Forms.Button();
             this.groupBoxFunc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBoxWatch.SuspendLayout();
@@ -66,6 +66,24 @@
             this.groupBoxFunc.TabIndex = 0;
             this.groupBoxFunc.TabStop = false;
             this.groupBoxFunc.Text = "Функции";
+            // 
+            // buttonDoneGoods
+            // 
+            this.buttonDoneGoods.Location = new System.Drawing.Point(376, 89);
+            this.buttonDoneGoods.Name = "buttonDoneGoods";
+            this.buttonDoneGoods.Size = new System.Drawing.Size(179, 55);
+            this.buttonDoneGoods.TabIndex = 10;
+            this.buttonDoneGoods.Text = "Журнал выхода\r\n";
+            this.buttonDoneGoods.UseVisualStyleBackColor = true;
+            // 
+            // buttonUsing
+            // 
+            this.buttonUsing.Location = new System.Drawing.Point(177, 89);
+            this.buttonUsing.Name = "buttonUsing";
+            this.buttonUsing.Size = new System.Drawing.Size(193, 55);
+            this.buttonUsing.TabIndex = 9;
+            this.buttonUsing.Text = "Журнал использования";
+            this.buttonUsing.UseVisualStyleBackColor = true;
             // 
             // buttonManageFactory
             // 
@@ -163,7 +181,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(591, 23);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(593, 235);
+            this.dataGridView1.Size = new System.Drawing.Size(593, 292);
             this.dataGridView1.TabIndex = 1;
             // 
             // ButtonStocks
@@ -179,22 +197,22 @@
             // buttonDeleteData
             // 
             this.buttonDeleteData.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonDeleteData.Location = new System.Drawing.Point(838, 271);
+            this.buttonDeleteData.Location = new System.Drawing.Point(998, 321);
             this.buttonDeleteData.Name = "buttonDeleteData";
-            this.buttonDeleteData.Size = new System.Drawing.Size(165, 44);
+            this.buttonDeleteData.Size = new System.Drawing.Size(77, 26);
             this.buttonDeleteData.TabIndex = 8;
-            this.buttonDeleteData.Text = "Удалить кортеж";
+            this.buttonDeleteData.Text = "Удалить ";
             this.buttonDeleteData.UseVisualStyleBackColor = true;
             this.buttonDeleteData.Visible = false;
             // 
             // buttonSaveData
             // 
             this.buttonSaveData.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonSaveData.Location = new System.Drawing.Point(1009, 271);
+            this.buttonSaveData.Location = new System.Drawing.Point(1081, 321);
             this.buttonSaveData.Name = "buttonSaveData";
-            this.buttonSaveData.Size = new System.Drawing.Size(175, 44);
+            this.buttonSaveData.Size = new System.Drawing.Size(92, 26);
             this.buttonSaveData.TabIndex = 9;
-            this.buttonSaveData.Text = "Сохранить изменения";
+            this.buttonSaveData.Text = "Сохранить";
             this.buttonSaveData.UseVisualStyleBackColor = true;
             this.buttonSaveData.Visible = false;
             // 
@@ -224,24 +242,6 @@
             this.buttonInfo.Text = "?";
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
-            // 
-            // buttonUsing
-            // 
-            this.buttonUsing.Location = new System.Drawing.Point(177, 89);
-            this.buttonUsing.Name = "buttonUsing";
-            this.buttonUsing.Size = new System.Drawing.Size(193, 55);
-            this.buttonUsing.TabIndex = 9;
-            this.buttonUsing.Text = "Журнал использования";
-            this.buttonUsing.UseVisualStyleBackColor = true;
-            // 
-            // buttonDoneGoods
-            // 
-            this.buttonDoneGoods.Location = new System.Drawing.Point(376, 89);
-            this.buttonDoneGoods.Name = "buttonDoneGoods";
-            this.buttonDoneGoods.Size = new System.Drawing.Size(179, 55);
-            this.buttonDoneGoods.TabIndex = 10;
-            this.buttonDoneGoods.Text = "Журнал выхода\r\n";
-            this.buttonDoneGoods.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 

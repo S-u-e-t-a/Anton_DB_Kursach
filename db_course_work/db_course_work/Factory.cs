@@ -16,18 +16,26 @@ namespace db_course_work
         {
             try
             {
-                var command = new MySqlCommand("UPDATE factoty SET Fact_status = @stat, Fact_time = @time WHERE Fact_ID = @id");
-                command.Parameters.Add("@stat", MySqlDbType.VarChar).Value = textBoxStatus.Text;
-                command.Parameters.Add("@time", MySqlDbType.Int32).Value = numericUpDownTime.Value;
-                command.Parameters.Add("@id", MySqlDbType.Int32).Value = numericUpDownFactID.Value;
-                db.OpenConnection();
-                command.Connection = db.GetConnection();
-                command.ExecuteNonQuery();
-                db.CloseConnection();
+                if (!string.IsNullOrWhiteSpace(textBoxStatus.Text))
+                {
+                    db.OpenConnection();
+                    var command = new MySqlCommand("UPDATE factory SET Fact_status = @stat, Fact_time = @time WHERE Fact_ID = @id", db.GetConnection());
+                    command.Parameters.Add("@stat", MySqlDbType.VarChar).Value = textBoxStatus.Text;
+                    command.Parameters.Add("@time", MySqlDbType.Int32).Value = numericUpDownTime.Value;
+                    command.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(comboBoxFactID.Text);
+                    command.Connection = db.GetConnection();
+                    command.ExecuteNonQuery();
+                    db.CloseConnection();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Вы не указали статус РЦ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
-
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

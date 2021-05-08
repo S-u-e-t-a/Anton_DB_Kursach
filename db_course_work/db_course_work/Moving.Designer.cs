@@ -106,24 +106,24 @@
             // 
             this.numericUpDownMaterialID.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownMaterialID.Location = new System.Drawing.Point(90, 98);
-            this.numericUpDownMaterialID.Minimum = new decimal(new int[] {
-            1,
+            this.numericUpDownMaterialID.Maximum = new decimal(new int[] {
+            13,
             0,
             0,
             0});
             this.numericUpDownMaterialID.Name = "numericUpDownMaterialID";
             this.numericUpDownMaterialID.Size = new System.Drawing.Size(120, 29);
             this.numericUpDownMaterialID.TabIndex = 8;
-            this.numericUpDownMaterialID.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // numericUpDownStorageIDFrom
             // 
             this.numericUpDownStorageIDFrom.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownStorageIDFrom.Location = new System.Drawing.Point(12, 38);
+            this.numericUpDownStorageIDFrom.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.numericUpDownStorageIDFrom.Minimum = new decimal(new int[] {
             1,
             0,
@@ -142,6 +142,11 @@
             // 
             this.numericUpDownStorageIDTo.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownStorageIDTo.Location = new System.Drawing.Point(181, 38);
+            this.numericUpDownStorageIDTo.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.numericUpDownStorageIDTo.Minimum = new decimal(new int[] {
             1,
             0,
@@ -151,7 +156,7 @@
             this.numericUpDownStorageIDTo.Size = new System.Drawing.Size(120, 29);
             this.numericUpDownStorageIDTo.TabIndex = 14;
             this.numericUpDownStorageIDTo.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
