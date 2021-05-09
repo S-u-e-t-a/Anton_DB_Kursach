@@ -76,10 +76,85 @@ namespace db_course_work
             List<string> IdOfUsedSpecificatons = new List<string>();
             List<string> IdOfUsedMap = new List<string>();
             List<string> IdOfUsedMaterials = new List<string>();
-           
+
+
+            int n = 0;
+
+            if (EnabledCusID.Contains(Convert.ToInt32(numericUpDownOrderID.Value)))
+            {
+                db.OpenConnection();
+                command = new MySqlCommand("SELECT Mat_ID FROM custom WHERE Cus_ID = @id");
+                command.Parameters.Add("@id", MySqlDbType.Int32).Value = numericUpDownOrderID.Value;
+                command.Connection = db.GetConnection();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    IdOfUsedMaterials.Add(reader["Mat_ID"].ToString());
+                }
+                reader.Close();
+
+                while (true)
+                {
+                    for (int i = 0; i < IdOfUsedMaterials.Count; i++)
+                    {
+                        command = new MySqlCommand("SELECT Spec_ID, Map_ID FROM material WHERE Mat_ID = @id");
+                        command.Parameters.Add("@id", MySqlDbType.Int32).Value = IdOfUsedMaterials[i];
+                        command.Connection = db.GetConnection();
+                        reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            if (!string.IsNullOrWhiteSpace(reader["Spec_ID"].ToString()) && (!string.IsNullOrWhiteSpace(reader["Map_ID"].ToString())))
+                            {
+                                IdOfUsedSpecificatons.Add(reader["Spec_ID"].ToString());
+                                IdOfUsedMap.Add(reader["Map_ID"].ToString());
+                            }
+                        }
+                        reader.Close();
+
+
+                        for (int k = n; k < IdOfUsedSpecificatons.Count; k++)
+                        {
+                            if (!string.IsNullOrWhiteSpace(IdOfUsedSpecificatons[k]))
+                            {
+                                command = new MySqlCommand("SELECT Mat_ID FROM comp_spec WHERE Spec_ID = @id");
+                                command.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(IdOfUsedSpecificatons[k]);
+                                command.Connection = db.GetConnection();
+                                reader = command.ExecuteReader();
+                                while (reader.Read())
+                                {
+                                    if (!IdOfUsedMaterials.Contains(reader["Mat_ID"].ToString()))
+                                    {
+                                        IdOfUsedMaterials.Add(reader["Mat_ID"].ToString());
+                                    }
+                                }
+                                reader.Close();
+                                n++;
+                            }
+                        }
+                    }
+                    break;
+                }
+
+            }
+
+            StatUsingGrid.Columns.Clear();
+
+            StatUsingGrid.Columns.Add("Cus_ID", "ID заказа"); StatUsingGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            StatUsingGrid.Columns.Add("Used_Spec", "Использованные спецификации");
+            StatUsingGrid.Columns.Add("Used_Map", "Использованные тех.карты");
+
+            for (int i = 0; i < IdOfUsedSpecificatons.Count; i++)
+            {
+                StatUsingGrid.Rows.Add(numericUpDownOrderID.Value, IdOfUsedSpecificatons[i], IdOfUsedMap[i]);
+            }
+
+            reader.Close();
+
+            db.CloseConnection();
         }
     }
 }
+
 
 
 
