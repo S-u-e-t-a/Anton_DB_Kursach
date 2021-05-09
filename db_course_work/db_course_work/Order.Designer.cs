@@ -106,6 +106,7 @@
             this.MaterialGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MaterialGrid.Location = new System.Drawing.Point(144, 18);
             this.MaterialGrid.Name = "MaterialGrid";
+            this.MaterialGrid.ReadOnly = true;
             this.MaterialGrid.RowHeadersVisible = false;
             this.MaterialGrid.Size = new System.Drawing.Size(240, 150);
             this.MaterialGrid.TabIndex = 14;

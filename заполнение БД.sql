@@ -55,28 +55,28 @@ INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (4,
 INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (5, 'Сборка корпуса', 2, 4, 30);
 
 -- номенклатура
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (0, 'Резиновый шланг', 3, 3);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (1, 'Металическая ручка', 3, 3);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (2, 'Щётка', 4, 4);
+INSERT INTO material (Mat_ID, Mat_description) VALUES (0, 'Резиновый шланг');
+INSERT INTO material (Mat_ID, Mat_description) VALUES (1, 'Металическая ручка');
+INSERT INTO material (Mat_ID, Mat_description) VALUES (2, 'Щётка');
 
 -- сами
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (3, 'Шланг', 4, 4);
+INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (3, 'Шланг', 3, 3);
 
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (4, 'Пластиковый корпус', 4, 4);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (5, 'Корпус для фильтра', 2, 2);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (6, 'Волоконный материал', 2, 2);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (7, 'Компрессор', 1, 1);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (8, 'Электродвигатель', 1, 1);
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (9, 'Ёмкость для пыли', 0, 0);
-
--- сами
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (10, 'Корпус в сборе', 0, 0);
+INSERT INTO material (Mat_ID, Mat_description) VALUES (4, 'Пластиковый корпус');
+INSERT INTO material (Mat_ID, Mat_description) VALUES (5, 'Корпус для фильтра');
+INSERT INTO material (Mat_ID, Mat_description) VALUES (6, 'Волоконный материал' );
+INSERT INTO material (Mat_ID, Mat_description) VALUES (7, 'Компрессор');
+INSERT INTO material (Mat_ID, Mat_description) VALUES (8, 'Электродвигатель');
+INSERT INTO material (Mat_ID, Mat_description) VALUES (9, 'Ёмкость для пыли');
 
 -- сами
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (11, 'Фильтр', 0, 0);
+INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (10, 'Корпус в сборе', 4, 4);
 
 -- сами
-INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (12, 'Электрическая часть', 0, 0);
+INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (11, 'Фильтр', 2, 2);
+
+-- сами
+INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (12, 'Электрическая часть', 1, 1);
 
 -- сами
 INSERT INTO material (Mat_ID, Mat_description, Spec_ID, Map_ID) VALUES (13, 'Пылесос', 0, 0);

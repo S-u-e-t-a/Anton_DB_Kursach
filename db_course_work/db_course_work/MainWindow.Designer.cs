@@ -46,6 +46,8 @@
             this.buttonSaveData = new System.Windows.Forms.Button();
             this.groupBoxWatch = new System.Windows.Forms.GroupBox();
             this.buttonInfo = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelNameTable = new System.Windows.Forms.Label();
             this.groupBoxFunc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBoxWatch.SuspendLayout();
@@ -178,10 +180,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(591, 23);
+            this.dataGridView1.Location = new System.Drawing.Point(591, 40);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(593, 292);
+            this.dataGridView1.Size = new System.Drawing.Size(593, 275);
             this.dataGridView1.TabIndex = 1;
             // 
             // ButtonStocks
@@ -243,11 +246,33 @@
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(590, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 22);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Таблица: ";
+            // 
+            // labelNameTable
+            // 
+            this.labelNameTable.AutoSize = true;
+            this.labelNameTable.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
+            this.labelNameTable.Location = new System.Drawing.Point(662, 12);
+            this.labelNameTable.Name = "labelNameTable";
+            this.labelNameTable.Size = new System.Drawing.Size(46, 22);
+            this.labelNameTable.TabIndex = 12;
+            this.labelNameTable.Text = "None";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1196, 344);
+            this.Controls.Add(this.labelNameTable);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonInfo);
             this.Controls.Add(this.groupBoxWatch);
             this.Controls.Add(this.buttonDeleteData);
@@ -261,6 +286,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBoxWatch.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -284,6 +310,8 @@
         private System.Windows.Forms.Button buttonInfo;
         private System.Windows.Forms.Button buttonDoneGoods;
         private System.Windows.Forms.Button buttonUsing;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelNameTable;
     }
 }
 

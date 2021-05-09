@@ -1,14 +1,6 @@
-﻿/*
-Created: 05.04.2021
-Modified: 08.05.2021
-Project: kursach
-Model: MySQL 8.0
-Database: MySQL 8.0
-*/
-
--- Create tables section -------------------------------------------------
-
--- Table Custom
+﻿
+CREATE DATABASE course_work;
+USE course_work;
 
 CREATE TABLE `Custom`
 (
@@ -30,8 +22,8 @@ CREATE TABLE `Material`
 (
   `Mat_ID` Int NOT NULL,
   `Mat_description` Char(40) NOT NULL,
-  `Spec_ID` Int NOT NULL,
-  `Map_ID` Int NOT NULL
+  `Spec_ID` Int,
+  `Map_ID` Int
 )
 ;
 
@@ -144,7 +136,7 @@ CREATE TABLE `Comp_Map`
   `Oper_ID` Int NOT NULL,
   `Oper_desc` Char(25) NOT NULL,
   `Oper_time` Int NOT NULL,
-  `Next_oper_ID` Int NOT NULL,
+  `Next_oper_ID` Int,
   `Map_ID` Int NOT NULL,
   `Fact_ID` Int NOT NULL
 )

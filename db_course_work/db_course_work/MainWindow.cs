@@ -22,6 +22,7 @@ namespace db_course_work
 
         private void ButtonNomenclature_Click(object sender, EventArgs e)
         {
+            labelNameTable.Text = "Номенклатура";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM material");
             db.OpenConnection();
@@ -42,6 +43,7 @@ namespace db_course_work
 
         private void ButtonStocks_Click(object sender, EventArgs e)
         {
+            labelNameTable.Text = "Запасы";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM contains");
             db.OpenConnection();
@@ -63,6 +65,7 @@ namespace db_course_work
 
         private void buttonCustoms_Click(object sender, EventArgs e)
         {
+            labelNameTable.Text = "Заказы";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM custom");
             db.OpenConnection();
@@ -87,6 +90,7 @@ namespace db_course_work
 
         private void buttonFactory_Click(object sender, EventArgs e)
         {
+            labelNameTable.Text = "Рабочие центры";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM factory");
             db.OpenConnection();
@@ -108,6 +112,7 @@ namespace db_course_work
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
+            labelNameTable.Text = "Группы заменимости";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM group_change");
             db.OpenConnection();
@@ -127,6 +132,7 @@ namespace db_course_work
 
         private void buttonStore_Click(object sender, EventArgs e)
         {
+            labelNameTable.Text = "Склады";
             dataGridView1.Columns.Clear();
             MySqlCommand command = new MySqlCommand("SELECT * FROM storage");
             db.OpenConnection();
