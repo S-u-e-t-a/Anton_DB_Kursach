@@ -66,9 +66,9 @@
             this.label2.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.label2.Location = new System.Drawing.Point(8, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 22);
+            this.label2.Size = new System.Drawing.Size(96, 22);
             this.label2.TabIndex = 11;
-            this.label2.Text = "ID Материала";
+            this.label2.Text = "ID Продукта";
             // 
             // numericUpDownAmount
             // 

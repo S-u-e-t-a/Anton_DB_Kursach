@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxFunc = new System.Windows.Forms.GroupBox();
-            this.buttonDoneGoods = new System.Windows.Forms.Button();
+            this.buttonUsedMateials = new System.Windows.Forms.Button();
             this.buttonUsing = new System.Windows.Forms.Button();
             this.buttonManageFactory = new System.Windows.Forms.Button();
             this.buttonShake = new System.Windows.Forms.Button();
@@ -55,7 +55,7 @@
             // 
             // groupBoxFunc
             // 
-            this.groupBoxFunc.Controls.Add(this.buttonDoneGoods);
+            this.groupBoxFunc.Controls.Add(this.buttonUsedMateials);
             this.groupBoxFunc.Controls.Add(this.buttonUsing);
             this.groupBoxFunc.Controls.Add(this.buttonManageFactory);
             this.groupBoxFunc.Controls.Add(this.buttonShake);
@@ -69,14 +69,14 @@
             this.groupBoxFunc.TabStop = false;
             this.groupBoxFunc.Text = "Функции";
             // 
-            // buttonDoneGoods
+            // buttonUsedMateials
             // 
-            this.buttonDoneGoods.Location = new System.Drawing.Point(376, 89);
-            this.buttonDoneGoods.Name = "buttonDoneGoods";
-            this.buttonDoneGoods.Size = new System.Drawing.Size(179, 55);
-            this.buttonDoneGoods.TabIndex = 10;
-            this.buttonDoneGoods.Text = "Журнал выхода\r\n";
-            this.buttonDoneGoods.UseVisualStyleBackColor = true;
+            this.buttonUsedMateials.Location = new System.Drawing.Point(376, 89);
+            this.buttonUsedMateials.Name = "buttonUsedMateials";
+            this.buttonUsedMateials.Size = new System.Drawing.Size(179, 55);
+            this.buttonUsedMateials.TabIndex = 10;
+            this.buttonUsedMateials.Text = "Журнал выхода\r\n";
+            this.buttonUsedMateials.UseVisualStyleBackColor = true;
             // 
             // buttonUsing
             // 
@@ -86,6 +86,7 @@
             this.buttonUsing.TabIndex = 9;
             this.buttonUsing.Text = "Журнал использования";
             this.buttonUsing.UseVisualStyleBackColor = true;
+            this.buttonUsing.Click += new System.EventHandler(this.buttonUsing_Click);
             // 
             // buttonManageFactory
             // 
@@ -308,7 +309,7 @@
         private System.Windows.Forms.Button buttonSaveData;
         private System.Windows.Forms.GroupBox groupBoxWatch;
         private System.Windows.Forms.Button buttonInfo;
-        private System.Windows.Forms.Button buttonDoneGoods;
+        private System.Windows.Forms.Button buttonUsedMateials;
         private System.Windows.Forms.Button buttonUsing;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelNameTable;

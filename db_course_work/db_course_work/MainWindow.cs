@@ -213,5 +213,11 @@ namespace db_course_work
             var factory = new Factory();
             factory.ShowDialog();
         }
+
+        private void buttonUsing_Click(object sender, EventArgs e)
+        {
+            var usingStat = new StatUsingSpecification();
+            usingStat.ShowDialog();
+        }
     }
 }
