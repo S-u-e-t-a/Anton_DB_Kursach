@@ -77,6 +77,7 @@
             this.buttonUsedMateials.TabIndex = 10;
             this.buttonUsedMateials.Text = "Журнал выхода\r\n";
             this.buttonUsedMateials.UseVisualStyleBackColor = true;
+            this.buttonUsedMateials.Click += new System.EventHandler(this.buttonUsedMateials_Click);
             // 
             // buttonUsing
             // 

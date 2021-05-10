@@ -89,6 +89,12 @@
     <Compile Include="StatUsingSpecification.Designer.cs">
       <DependentUpon>StatUsingSpecification.cs</DependentUpon>
     </Compile>
+    <Compile Include="UsedMaterials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsedMaterials.Designer.cs">
+      <DependentUpon>UsedMaterials.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Factory.resx">
       <DependentUpon>Factory.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +121,9 @@
     </Compile>
     <EmbeddedResource Include="StatUsingSpecification.resx">
       <DependentUpon>StatUsingSpecification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsedMaterials.resx">
+      <DependentUpon>UsedMaterials.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

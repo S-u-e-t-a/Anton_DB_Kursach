@@ -194,30 +194,40 @@ namespace db_course_work
         {
             var import = new Import();
             import.ShowDialog();
+            ButtonStocks_Click(null, null);
         }
 
         private void buttonShake_Click(object sender, EventArgs e)
         {
             var moving = new Moving();
             moving.ShowDialog();
+            ButtonStocks_Click(null, null);
         }
 
         private void ButtonAddPurchase_Click(object sender, EventArgs e)
         {
             var order = new Order();
             order.ShowDialog();
+            buttonCustoms_Click(null, null);
         }
 
         private void buttonManageFactory_Click(object sender, EventArgs e)
         {
             var factory = new Factory();
             factory.ShowDialog();
+            buttonFactory_Click(null, null);
         }
 
         private void buttonUsing_Click(object sender, EventArgs e)
         {
             var usingStat = new StatUsingSpecification();
             usingStat.ShowDialog();
+        }
+
+        private void buttonUsedMateials_Click(object sender, EventArgs e)
+        {
+            var usingMat = new UsedMaterials();
+            usingMat.ShowDialog();
         }
     }
 }

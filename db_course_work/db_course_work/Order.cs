@@ -56,7 +56,7 @@ namespace db_course_work
             MySqlDataReader reader;
 
             MaterialGrid.Columns.Clear();
-            command = new MySqlCommand("SELECT Mat_ID, Mat_description FROM material WHERE Spec_ID IS NOT NULL");
+            command = new MySqlCommand("SELECT Mat_ID, Mat_description FROM material WHERE Spec_ID IS NOT NULL ORDER BY Mat_ID");
             db.OpenConnection();
             command.Connection = db.GetConnection();
             reader = command.ExecuteReader();
