@@ -204,12 +204,6 @@ namespace db_course_work
             ButtonStocks_Click(null, null);
         }
 
-        private void ButtonAddPurchase_Click(object sender, EventArgs e)
-        {
-            var order = new Order();
-            order.ShowDialog();
-            buttonCustoms_Click(null, null);
-        }
 
         private void buttonManageFactory_Click(object sender, EventArgs e)
         {
@@ -228,6 +222,13 @@ namespace db_course_work
         {
             var usingMat = new UsedMaterials();
             usingMat.ShowDialog();
+        }
+
+        private void buttonMakeOrder_Click(object sender, EventArgs e)
+        {
+            var order = new Order();
+            order.ShowDialog();
+            buttonCustoms_Click(null, null);
         }
     }
 }

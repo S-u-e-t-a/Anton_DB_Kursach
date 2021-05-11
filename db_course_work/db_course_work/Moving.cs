@@ -77,7 +77,7 @@ namespace db_course_work
                 {
                     MessageBox.Show("Перемещения возможны между различными складами", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
-
+                Close();
             }
             catch (MySqlException ex)
             {

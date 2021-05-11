@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxFunc = new System.Windows.Forms.GroupBox();
+            this.buttonMakeOrder = new System.Windows.Forms.Button();
             this.buttonUsedMateials = new System.Windows.Forms.Button();
             this.buttonUsing = new System.Windows.Forms.Button();
             this.buttonManageFactory = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@
             this.buttonDeleteData = new System.Windows.Forms.Button();
             this.buttonSaveData = new System.Windows.Forms.Button();
             this.groupBoxWatch = new System.Windows.Forms.GroupBox();
-            this.buttonInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelNameTable = new System.Windows.Forms.Label();
             this.groupBoxFunc.SuspendLayout();
@@ -55,6 +55,7 @@
             // 
             // groupBoxFunc
             // 
+            this.groupBoxFunc.Controls.Add(this.buttonMakeOrder);
             this.groupBoxFunc.Controls.Add(this.buttonUsedMateials);
             this.groupBoxFunc.Controls.Add(this.buttonUsing);
             this.groupBoxFunc.Controls.Add(this.buttonManageFactory);
@@ -64,34 +65,44 @@
             this.groupBoxFunc.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.groupBoxFunc.Location = new System.Drawing.Point(12, 12);
             this.groupBoxFunc.Name = "groupBoxFunc";
-            this.groupBoxFunc.Size = new System.Drawing.Size(572, 155);
+            this.groupBoxFunc.Size = new System.Drawing.Size(572, 227);
             this.groupBoxFunc.TabIndex = 0;
             this.groupBoxFunc.TabStop = false;
             this.groupBoxFunc.Text = "Функции";
             // 
+            // buttonMakeOrder
+            // 
+            this.buttonMakeOrder.Location = new System.Drawing.Point(6, 89);
+            this.buttonMakeOrder.Name = "buttonMakeOrder";
+            this.buttonMakeOrder.Size = new System.Drawing.Size(165, 55);
+            this.buttonMakeOrder.TabIndex = 11;
+            this.buttonMakeOrder.Text = "Сделать заказ (пользователь)";
+            this.buttonMakeOrder.UseVisualStyleBackColor = true;
+            this.buttonMakeOrder.Click += new System.EventHandler(this.buttonMakeOrder_Click);
+            // 
             // buttonUsedMateials
             // 
-            this.buttonUsedMateials.Location = new System.Drawing.Point(376, 89);
+            this.buttonUsedMateials.Location = new System.Drawing.Point(376, 150);
             this.buttonUsedMateials.Name = "buttonUsedMateials";
-            this.buttonUsedMateials.Size = new System.Drawing.Size(179, 55);
+            this.buttonUsedMateials.Size = new System.Drawing.Size(165, 55);
             this.buttonUsedMateials.TabIndex = 10;
-            this.buttonUsedMateials.Text = "Журнал выхода\r\n";
+            this.buttonUsedMateials.Text = "Журнал использования\r\n";
             this.buttonUsedMateials.UseVisualStyleBackColor = true;
             this.buttonUsedMateials.Click += new System.EventHandler(this.buttonUsedMateials_Click);
             // 
             // buttonUsing
             // 
-            this.buttonUsing.Location = new System.Drawing.Point(177, 89);
+            this.buttonUsing.Location = new System.Drawing.Point(376, 89);
             this.buttonUsing.Name = "buttonUsing";
-            this.buttonUsing.Size = new System.Drawing.Size(193, 55);
+            this.buttonUsing.Size = new System.Drawing.Size(165, 55);
             this.buttonUsing.TabIndex = 9;
-            this.buttonUsing.Text = "Журнал использования";
+            this.buttonUsing.Text = "Журнал выхода";
             this.buttonUsing.UseVisualStyleBackColor = true;
             this.buttonUsing.Click += new System.EventHandler(this.buttonUsing_Click);
             // 
             // buttonManageFactory
             // 
-            this.buttonManageFactory.Location = new System.Drawing.Point(6, 89);
+            this.buttonManageFactory.Location = new System.Drawing.Point(376, 28);
             this.buttonManageFactory.Name = "buttonManageFactory";
             this.buttonManageFactory.Size = new System.Drawing.Size(165, 55);
             this.buttonManageFactory.TabIndex = 8;
@@ -101,9 +112,9 @@
             // 
             // buttonShake
             // 
-            this.buttonShake.Location = new System.Drawing.Point(376, 28);
+            this.buttonShake.Location = new System.Drawing.Point(177, 28);
             this.buttonShake.Name = "buttonShake";
-            this.buttonShake.Size = new System.Drawing.Size(179, 55);
+            this.buttonShake.Size = new System.Drawing.Size(193, 55);
             this.buttonShake.TabIndex = 6;
             this.buttonShake.Text = "Заказ перемещения";
             this.buttonShake.UseVisualStyleBackColor = true;
@@ -111,7 +122,7 @@
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(177, 28);
+            this.buttonImport.Location = new System.Drawing.Point(177, 89);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(193, 55);
             this.buttonImport.TabIndex = 5;
@@ -127,7 +138,6 @@
             this.ButtonAddPurchase.TabIndex = 0;
             this.ButtonAddPurchase.Text = "Производственный заказ";
             this.ButtonAddPurchase.UseVisualStyleBackColor = true;
-            this.ButtonAddPurchase.Click += new System.EventHandler(this.ButtonAddPurchase_Click);
             // 
             // buttonStore
             // 
@@ -135,7 +145,7 @@
             this.buttonStore.Name = "buttonStore";
             this.buttonStore.Size = new System.Drawing.Size(175, 55);
             this.buttonStore.TabIndex = 1;
-            this.buttonStore.Text = "Посмотреть таблицу \"Склады\"";
+            this.buttonStore.Text = "Таблица \"Склады\"";
             this.buttonStore.UseVisualStyleBackColor = true;
             this.buttonStore.Click += new System.EventHandler(this.buttonStore_Click);
             // 
@@ -145,7 +155,7 @@
             this.ButtonNomenclature.Name = "ButtonNomenclature";
             this.ButtonNomenclature.Size = new System.Drawing.Size(193, 55);
             this.ButtonNomenclature.TabIndex = 0;
-            this.ButtonNomenclature.Text = "Посмотреть таблицу \"Номенклатура\"";
+            this.ButtonNomenclature.Text = "Таблица \"Номенклатура\"";
             this.ButtonNomenclature.UseVisualStyleBackColor = true;
             this.ButtonNomenclature.Click += new System.EventHandler(this.ButtonNomenclature_Click);
             // 
@@ -155,7 +165,7 @@
             this.buttonFactory.Name = "buttonFactory";
             this.buttonFactory.Size = new System.Drawing.Size(165, 55);
             this.buttonFactory.TabIndex = 3;
-            this.buttonFactory.Text = "Посмотреть таблицу \"Рабочие центры\"";
+            this.buttonFactory.Text = "Таблица \"Рабочие центры\"";
             this.buttonFactory.UseVisualStyleBackColor = true;
             this.buttonFactory.Click += new System.EventHandler(this.buttonFactory_Click);
             // 
@@ -165,7 +175,7 @@
             this.buttonGroups.Name = "buttonGroups";
             this.buttonGroups.Size = new System.Drawing.Size(193, 55);
             this.buttonGroups.TabIndex = 4;
-            this.buttonGroups.Text = "Посмотреть таблицу \"Группы заменимости\"";
+            this.buttonGroups.Text = "Таблица \"Группы заменимости\"";
             this.buttonGroups.UseVisualStyleBackColor = true;
             this.buttonGroups.Click += new System.EventHandler(this.buttonGroups_Click);
             // 
@@ -175,18 +185,18 @@
             this.buttonCustoms.Name = "buttonCustoms";
             this.buttonCustoms.Size = new System.Drawing.Size(165, 55);
             this.buttonCustoms.TabIndex = 7;
-            this.buttonCustoms.Text = "Посмотреть таблицу \"Заказы\"";
+            this.buttonCustoms.Text = "Таблица \"Заказы\"";
             this.buttonCustoms.UseVisualStyleBackColor = true;
             this.buttonCustoms.Click += new System.EventHandler(this.buttonCustoms_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(591, 40);
+            this.dataGridView1.Location = new System.Drawing.Point(594, 40);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(593, 275);
+            this.dataGridView1.Size = new System.Drawing.Size(593, 368);
             this.dataGridView1.TabIndex = 1;
             // 
             // ButtonStocks
@@ -195,14 +205,14 @@
             this.ButtonStocks.Name = "ButtonStocks";
             this.ButtonStocks.Size = new System.Drawing.Size(175, 55);
             this.ButtonStocks.TabIndex = 2;
-            this.ButtonStocks.Text = "Посмотреть таблицу \"Запасы\"";
+            this.ButtonStocks.Text = "Таблица \"Запасы\"";
             this.ButtonStocks.UseVisualStyleBackColor = true;
             this.ButtonStocks.Click += new System.EventHandler(this.ButtonStocks_Click);
             // 
             // buttonDeleteData
             // 
             this.buttonDeleteData.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonDeleteData.Location = new System.Drawing.Point(998, 321);
+            this.buttonDeleteData.Location = new System.Drawing.Point(1014, 414);
             this.buttonDeleteData.Name = "buttonDeleteData";
             this.buttonDeleteData.Size = new System.Drawing.Size(77, 26);
             this.buttonDeleteData.TabIndex = 8;
@@ -213,7 +223,7 @@
             // buttonSaveData
             // 
             this.buttonSaveData.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonSaveData.Location = new System.Drawing.Point(1081, 321);
+            this.buttonSaveData.Location = new System.Drawing.Point(1092, 414);
             this.buttonSaveData.Name = "buttonSaveData";
             this.buttonSaveData.Size = new System.Drawing.Size(92, 26);
             this.buttonSaveData.TabIndex = 9;
@@ -230,23 +240,12 @@
             this.groupBoxWatch.Controls.Add(this.ButtonNomenclature);
             this.groupBoxWatch.Controls.Add(this.buttonStore);
             this.groupBoxWatch.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBoxWatch.Location = new System.Drawing.Point(12, 169);
+            this.groupBoxWatch.Location = new System.Drawing.Point(12, 245);
             this.groupBoxWatch.Name = "groupBoxWatch";
             this.groupBoxWatch.Size = new System.Drawing.Size(572, 163);
             this.groupBoxWatch.TabIndex = 9;
             this.groupBoxWatch.TabStop = false;
             this.groupBoxWatch.Text = "Просмотр";
-            // 
-            // buttonInfo
-            // 
-            this.buttonInfo.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonInfo.Location = new System.Drawing.Point(1179, 321);
-            this.buttonInfo.Name = "buttonInfo";
-            this.buttonInfo.Size = new System.Drawing.Size(26, 30);
-            this.buttonInfo.TabIndex = 10;
-            this.buttonInfo.Text = "?";
-            this.buttonInfo.UseVisualStyleBackColor = true;
-            this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
             // 
             // label1
             // 
@@ -272,10 +271,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 344);
+            this.ClientSize = new System.Drawing.Size(1196, 438);
             this.Controls.Add(this.labelNameTable);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonInfo);
             this.Controls.Add(this.groupBoxWatch);
             this.Controls.Add(this.buttonDeleteData);
             this.Controls.Add(this.buttonSaveData);
@@ -309,11 +307,11 @@
         private System.Windows.Forms.Button buttonDeleteData;
         private System.Windows.Forms.Button buttonSaveData;
         private System.Windows.Forms.GroupBox groupBoxWatch;
-        private System.Windows.Forms.Button buttonInfo;
         private System.Windows.Forms.Button buttonUsedMateials;
         private System.Windows.Forms.Button buttonUsing;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelNameTable;
+        private System.Windows.Forms.Button buttonMakeOrder;
     }
 }
 
