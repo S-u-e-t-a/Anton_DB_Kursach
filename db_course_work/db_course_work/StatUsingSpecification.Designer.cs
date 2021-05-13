@@ -130,9 +130,9 @@
             this.label4.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.label4.Location = new System.Drawing.Point(26, 250);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(176, 22);
+            this.label4.Size = new System.Drawing.Size(122, 22);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Журнал использования";
+            this.label4.Text = "Журнал выхода";
             // 
             // comboBoxType
             // 
@@ -162,7 +162,7 @@
             this.Controls.Add(this.numericUpDownOrderID);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "StatUsingSpecification";
-            this.Text = "Журнал использования";
+            this.Text = "Журнал выхода";
             this.Load += new System.EventHandler(this.StatUsingSpecification_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOrderID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderGrid)).EndInit();

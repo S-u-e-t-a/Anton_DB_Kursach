@@ -82,7 +82,7 @@ namespace db_course_work
             List<string> IdOfUsedFactory = new List<string>();
 
             int amount = 0;
-            int enabledTimeOfwork = 0;
+           // int enabledTimeOfwork = 0;
 
             int n = 0;
 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonEnterImport = new System.Windows.Forms.Button();
+            this.buttonMakeOdrer = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDownAmount = new System.Windows.Forms.NumericUpDown();
@@ -39,16 +39,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.MaterialGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonEnterImport
+            // buttonMakeOdrer
             // 
-            this.buttonEnterImport.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonEnterImport.Location = new System.Drawing.Point(25, 139);
-            this.buttonEnterImport.Name = "buttonEnterImport";
-            this.buttonEnterImport.Size = new System.Drawing.Size(75, 29);
-            this.buttonEnterImport.TabIndex = 13;
-            this.buttonEnterImport.Text = "Готово";
-            this.buttonEnterImport.UseVisualStyleBackColor = true;
-            this.buttonEnterImport.Click += new System.EventHandler(this.buttonEnterImport_Click);
+            this.buttonMakeOdrer.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonMakeOdrer.Location = new System.Drawing.Point(25, 139);
+            this.buttonMakeOdrer.Name = "buttonMakeOdrer";
+            this.buttonMakeOdrer.Size = new System.Drawing.Size(75, 29);
+            this.buttonMakeOdrer.TabIndex = 13;
+            this.buttonMakeOdrer.Text = "Готово";
+            this.buttonMakeOdrer.UseVisualStyleBackColor = true;
+            this.buttonMakeOdrer.Click += new System.EventHandler(this.buttonMakeOdrer_Click);
             // 
             // label3
             // 
@@ -117,7 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 193);
             this.Controls.Add(this.MaterialGrid);
-            this.Controls.Add(this.buttonEnterImport);
+            this.Controls.Add(this.buttonMakeOdrer);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numericUpDownAmount);
@@ -136,7 +136,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonEnterImport;
+        private System.Windows.Forms.Button buttonMakeOdrer;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDownAmount;

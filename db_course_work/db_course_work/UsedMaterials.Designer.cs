@@ -148,7 +148,7 @@
             this.Controls.Add(this.numericUpDownOrderID);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "UsedMaterials";
-            this.Text = "Журнал выхода";
+            this.Text = "Журнал использования";
             this.Load += new System.EventHandler(this.UsedMaterials_Load);
             ((System.ComponentModel.ISupportInitialize)(this.StatUsingGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderGrid)).EndInit();
