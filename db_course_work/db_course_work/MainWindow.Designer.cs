@@ -138,6 +138,7 @@
             this.ButtonAddPurchase.TabIndex = 0;
             this.ButtonAddPurchase.Text = "Производственный заказ";
             this.ButtonAddPurchase.UseVisualStyleBackColor = true;
+            this.ButtonAddPurchase.Click += new System.EventHandler(this.ButtonAddPurchase_Click);
             // 
             // buttonStore
             // 

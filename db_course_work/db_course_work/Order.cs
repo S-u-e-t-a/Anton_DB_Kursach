@@ -33,7 +33,7 @@ namespace db_course_work
                     command = new MySqlCommand("INSERT INTO custom (Mat_ID, Cus_amount, Cus_status, Cus_date) VALUES (@id, @amount, @status, @date)", db.GetConnection());
                     command.Parameters.Add("@id", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
                     command.Parameters.Add("@amount", MySqlDbType.Int32).Value = numericUpDownAmount.Value;
-                    command.Parameters.Add("@status", MySqlDbType.Int32).Value = 1;
+                    command.Parameters.Add("@status", MySqlDbType.VarChar).Value = "Создан";
                     command.Parameters.Add("@date", MySqlDbType.DateTime).Value = DateTime.Now;
                     command.Connection = db.GetConnection();
                     command.ExecuteNonQuery();
@@ -60,13 +60,24 @@ namespace db_course_work
                 reader.Close();
 
                 int amountINeed = (int)numericUpDownAmount.Value;
+
+                int maxIDCus = 0;
+                command = new MySqlCommand("(SELECT MAX(c.Cus_ID) FROM custom as c)");
+                command.Connection = db.GetConnection();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    maxIDCus = Convert.ToInt32(reader["MAX(c.Cus_ID)"]);
+                }
+                reader.Close();
+
                 for (int i = 0; i < amountMatOnStorage.Count; i++)
                 {
                     if (amountMatOnStorage[i] >= amountINeed)
                     {
 
-                        command = new MySqlCommand("UPDATE custom SET Cus_status = @status WHERE Mat_ID = @matid", db.GetConnection());
-                        command.Parameters.Add("@status", MySqlDbType.Int32).Value = 0;
+                        command = new MySqlCommand("UPDATE custom SET Cus_status = @status WHERE Mat_ID = @matid AND Cus_ID = " + maxIDCus, db.GetConnection());
+                        command.Parameters.Add("@status", MySqlDbType.VarChar).Value = "Выдан";
                         command.Parameters.Add("@matid", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;
                         command.Connection = db.GetConnection();
                         command.ExecuteNonQuery();
@@ -91,17 +102,7 @@ namespace db_course_work
                     }
                     if (amountINeed == 0) break;
                     if(amountINeed != 0 && i == amountMatOnStorage.Count - 1)
-                    {
-                        int maxIDCus = 0;
-                        command = new MySqlCommand("(SELECT MAX(c.Cus_ID) FROM custom as c)");
-                        command.Connection = db.GetConnection();
-                        reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            maxIDCus = Convert.ToInt32(reader["MAX(c.Cus_ID)"]);
-                        }
-                        reader.Close();
-
+                    {   
                         command = new MySqlCommand("UPDATE custom SET Cus_amount = @newAm WHERE Mat_ID = @matid AND Cus_ID = " + maxIDCus, db.GetConnection());
                         command.Parameters.Add("@newAm", MySqlDbType.Int32).Value = amountINeed;
                         command.Parameters.Add("@matid", MySqlDbType.Int32).Value = numericUpDownMaterialID.Value;

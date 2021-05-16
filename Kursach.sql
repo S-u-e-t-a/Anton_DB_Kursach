@@ -1,11 +1,9 @@
-﻿
-CREATE DATABASE course_work;
+﻿CREATE DATABASE course_work;
 USE course_work;
-
 CREATE TABLE `Custom`
 (
   `Cus_ID` Int NOT NULL AUTO_INCREMENT,
-  `Cus_status` Bool NOT NULL,
+  `Cus_status` Char(30) NOT NULL,
   `Cus_date` Datetime NOT NULL,
   `Cus_amount` Int NOT NULL,
   `Mat_ID` Int NOT NULL,

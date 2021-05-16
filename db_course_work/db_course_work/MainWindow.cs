@@ -230,5 +230,12 @@ namespace db_course_work
             order.ShowDialog();
             buttonCustoms_Click(null, null);
         }
+
+        private void ButtonAddPurchase_Click(object sender, EventArgs e)
+        {
+            var factoryOrder = new FactoryOrder();
+            factoryOrder.ShowDialog();
+            buttonCustoms_Click(null, null);
+        }
     }
 }

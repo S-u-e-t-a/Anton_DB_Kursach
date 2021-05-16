@@ -5,18 +5,18 @@ INSERT INTO storage VALUES (1, 'Северный');
 INSERT INTO storage VALUES (2, 'Южный');
 
 -- РЦ
-INSERT INTO factory VALUES (10, 'Доступен', 10);
-INSERT INTO factory VALUES (11, 'Доступен', 8);
-INSERT INTO factory VALUES (20, 'Доступен', 7);
-INSERT INTO factory VALUES (21, 'Доступен', 6);
-INSERT INTO factory VALUES (30, 'Доступен', 8);
-INSERT INTO factory VALUES (31, 'Доступен', 10);
-INSERT INTO factory VALUES (40, 'Доступен', 6);
-INSERT INTO factory VALUES (41, 'Доступен', 7);
-INSERT INTO factory VALUES (50, 'Доступен', 8);
-INSERT INTO factory VALUES (51, 'Доступен', 8);
-INSERT INTO factory VALUES (60, 'Доступен', 9);
-INSERT INTO factory VALUES (61, 'Доступен', 12);
+INSERT INTO factory VALUES (10, 'Доступен', 600);
+INSERT INTO factory VALUES (11, 'Доступен', 480);
+INSERT INTO factory VALUES (20, 'Доступен', 420);
+INSERT INTO factory VALUES (21, 'Доступен', 360);
+INSERT INTO factory VALUES (30, 'Доступен', 480);
+INSERT INTO factory VALUES (31, 'Доступен', 600);
+INSERT INTO factory VALUES (40, 'Доступен', 360);
+INSERT INTO factory VALUES (41, 'Доступен', 420);
+INSERT INTO factory VALUES (50, 'Доступен', 480);
+INSERT INTO factory VALUES (51, 'Доступен', 480);
+INSERT INTO factory VALUES (60, 'Доступен', 540);
+INSERT INTO factory VALUES (61, 'Доступен', 720);
 
 -- группы заменимости
 INSERT INTO group_change VALUES (1, 10);
@@ -47,12 +47,12 @@ INSERT INTO technological_map VALUES (3, 'Производство шланга'
 INSERT INTO technological_map VALUES (4, 'Производство корпуса');
 
 -- состав тех.карты
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Next_oper_ID, Map_ID, Fact_ID) VALUES (0, 'Сборка пылесоса', 2, 1, 0, 60);
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (1, 'Подключение пылесоса', 1, 0, 61);
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (2, 'Сборка эл.оборудования', 2, 1, 40);
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (3, 'Сборка фильтра', 1, 2, 50);
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (4, 'Сборка шланга', 1, 3, 10);
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (5, 'Сборка корпуса', 2, 4, 30);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Next_oper_ID, Map_ID, Fact_ID) VALUES (0, 'Сборка пылесоса', 2, 25, 0, 60);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (1, 'Подключение пылесоса', 25, 0, 61);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (2, 'Сборка эл.оборудования', 30, 1, 40);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (3, 'Сборка фильтра', 30, 2, 50);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (4, 'Сборка шланга', 15, 3, 10);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (5, 'Сборка корпуса', 60, 4, 30);
 
 -- номенклатура
 INSERT INTO material (Mat_ID, Mat_description) VALUES (0, 'Резиновый шланг');

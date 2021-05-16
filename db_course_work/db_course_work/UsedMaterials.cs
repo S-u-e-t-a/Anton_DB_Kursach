@@ -34,11 +34,10 @@ namespace db_course_work
 
         private void UsedMaterials_Load(object sender, EventArgs e)
         {
-
             try
             {
                 OrderGrid.Columns.Clear();
-                command = new MySqlCommand("SELECT * FROM custom INNER JOIN material ON custom.Mat_ID = material.Mat_ID");
+                command = new MySqlCommand("SELECT * FROM custom INNER JOIN material ON custom.Mat_ID = material.Mat_ID WHERE Cus_status = \"Производится\"");
                 db.OpenConnection();
                 command.Connection = db.GetConnection();
                 reader = command.ExecuteReader();
@@ -74,10 +73,7 @@ namespace db_course_work
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            List<string> IdOfUsedSpecificatons = new List<string>();
-            List<string> IdOfUsedMap = new List<string>();
-            List<string> IdOfUsedMaterials = new List<string>();
-            List<string> AmountMaterials = new List<string>();
+            var info = new UsingInfo();
 
             int amount = 0;
 
@@ -92,45 +88,45 @@ namespace db_course_work
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    IdOfUsedMaterials.Add(reader["Mat_ID"].ToString());
+                    info.IdOfUsedMaterials.Add(reader["Mat_ID"].ToString());
                     amount = Convert.ToInt32(reader["Cus_amount"]);
-                    AmountMaterials.Add(amount.ToString());
+                    info.AmountMaterials.Add(amount.ToString());
                 }
                 reader.Close();
 
                 while (true)
                 {
-                    for (int i = 0; i < IdOfUsedMaterials.Count; i++)
+                    for (int i = 0; i < info.IdOfUsedMaterials.Count; i++)
                     {
                         command = new MySqlCommand("SELECT Spec_ID, Map_ID FROM material WHERE Mat_ID = @id");
-                        command.Parameters.Add("@id", MySqlDbType.Int32).Value = IdOfUsedMaterials[i];
+                        command.Parameters.Add("@id", MySqlDbType.Int32).Value = info.IdOfUsedMaterials[i];
                         command.Connection = db.GetConnection();
                         reader = command.ExecuteReader();
                         while (reader.Read())
                         {
                             if (!string.IsNullOrWhiteSpace(reader["Spec_ID"].ToString()) && (!string.IsNullOrWhiteSpace(reader["Map_ID"].ToString())))
                             {
-                                IdOfUsedSpecificatons.Add(reader["Spec_ID"].ToString());
-                                IdOfUsedMap.Add(reader["Map_ID"].ToString());
+                                info.IdOfUsedSpecificatons.Add(reader["Spec_ID"].ToString());
+                                info.IdOfUsedMap.Add(reader["Map_ID"].ToString());
                             }
                         }
                         reader.Close();
 
 
-                        for (int k = n; k < IdOfUsedSpecificatons.Count; k++)
+                        for (int k = n; k < info.IdOfUsedSpecificatons.Count; k++)
                         {
-                            if (!string.IsNullOrWhiteSpace(IdOfUsedSpecificatons[k]))
+                            if (!string.IsNullOrWhiteSpace(info.IdOfUsedSpecificatons[k]))
                             {
                                 command = new MySqlCommand("SELECT Mat_ID, Comp_amount FROM comp_spec WHERE Spec_ID = @id");
-                                command.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(IdOfUsedSpecificatons[k]);
+                                command.Parameters.Add("@id", MySqlDbType.Int32).Value = Convert.ToInt32(info.IdOfUsedSpecificatons[k]);
                                 command.Connection = db.GetConnection();
                                 reader = command.ExecuteReader();
                                 while (reader.Read())
                                 {
-                                    if (!IdOfUsedMaterials.Contains(reader["Mat_ID"].ToString()))
+                                    if (!info.IdOfUsedMaterials.Contains(reader["Mat_ID"].ToString()))
                                     {
-                                        IdOfUsedMaterials.Add(reader["Mat_ID"].ToString());
-                                        AmountMaterials.Add(reader["Comp_amount"].ToString());
+                                        info.IdOfUsedMaterials.Add(reader["Mat_ID"].ToString());
+                                        info.AmountMaterials.Add(reader["Comp_amount"].ToString());
                                     }
                                 }
                                 reader.Close();
@@ -141,24 +137,31 @@ namespace db_course_work
                     break;
                 }
 
-                AmountMaterials.Reverse(); 
-                IdOfUsedMap.Reverse(); IdOfUsedMaterials.Reverse(); IdOfUsedSpecificatons.Reverse();
+                info.AmountMaterials.Reverse();
+                info.IdOfUsedMap.Reverse(); info.IdOfUsedMaterials.Reverse(); info.IdOfUsedSpecificatons.Reverse();
 
                 StatUsingGrid.Columns.Clear();
 
                 StatUsingGrid.Columns.Add("Step", "Номер шага");
                 StatUsingGrid.Columns.Add("Cus_ID", "ID заказа"); StatUsingGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                StatUsingGrid.Columns.Add("Used_Materials", "Использованные материалы");
+                StatUsingGrid.Columns.Add("Used_Materials", "Используемые материалы");
                 StatUsingGrid.Columns.Add("Amount", "Кол-во");
 
-                for (int i = 0; i < IdOfUsedMaterials.Count; i++)
+                for (int i = 0; i < info.IdOfUsedMaterials.Count; i++)
                 {
-                    if( i != IdOfUsedMaterials.Count - 1)
-                    StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, IdOfUsedMaterials[i], (Convert.ToInt32(AmountMaterials[i])*amount).ToString());
+                    if (i != info.IdOfUsedMaterials.Count - 1)
+                    {
+                        StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, info.IdOfUsedMaterials[i], (Convert.ToInt32(info.AmountMaterials[i]) * amount).ToString());  
+                    }
                     else
-                    StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, IdOfUsedMaterials[i], AmountMaterials[i]);
+                        StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, info.IdOfUsedMaterials[i], info.AmountMaterials[i]);
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("Указан некорректный ID заказа. Доступные для просмотра отчета заказы указаны в таблице.", "Ошибка",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
