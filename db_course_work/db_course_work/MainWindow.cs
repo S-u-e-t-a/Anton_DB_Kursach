@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace db_course_work
@@ -76,6 +77,7 @@ namespace db_course_work
             dataGridView1.Columns.Add("Cus_date", "Дата");
             dataGridView1.Columns.Add("Cus_amount", "Количество");
             dataGridView1.Columns.Add("Mat_ID", "ID Продукта");
+            int i = 0;
             while (reader.Read())
             {
                 dataGridView1.Rows.Add(reader["Cus_ID"].ToString(),
@@ -83,7 +85,19 @@ namespace db_course_work
                     reader["Cus_date"].ToString(),
                     reader["Cus_amount"].ToString(),
                     reader["Mat_ID"].ToString());
+                if (dataGridView1["Cus_status", i].Value.ToString() == "Производится")
+                {
+                    dataGridView1["Cus_status", i].Style.BackColor = Color.GreenYellow;
+                }
+                else
+                {
+                    dataGridView1["Cus_status", i].Style.BackColor = Color.White;
+                }
+                i++;
             }
+
+            
+
             reader.Close();
             db.CloseConnection();
         }
@@ -236,6 +250,13 @@ namespace db_course_work
             var factoryOrder = new FactoryOrder();
             factoryOrder.ShowDialog();
             buttonCustoms_Click(null, null);
+        }
+
+        private void ButtonLoadOut_Click(object sender, EventArgs e)
+        {
+            var loadOut = new LoadOut();
+            loadOut.ShowDialog();
+            ButtonStocks_Click(null, null);
         }
     }
 }

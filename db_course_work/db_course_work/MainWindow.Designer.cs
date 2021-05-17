@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxFunc = new System.Windows.Forms.GroupBox();
+            this.ButtonLoadOut = new System.Windows.Forms.Button();
             this.buttonMakeOrder = new System.Windows.Forms.Button();
             this.buttonUsedMateials = new System.Windows.Forms.Button();
             this.buttonUsing = new System.Windows.Forms.Button();
@@ -43,8 +44,6 @@
             this.buttonCustoms = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ButtonStocks = new System.Windows.Forms.Button();
-            this.buttonDeleteData = new System.Windows.Forms.Button();
-            this.buttonSaveData = new System.Windows.Forms.Button();
             this.groupBoxWatch = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.labelNameTable = new System.Windows.Forms.Label();
@@ -55,6 +54,7 @@
             // 
             // groupBoxFunc
             // 
+            this.groupBoxFunc.Controls.Add(this.ButtonLoadOut);
             this.groupBoxFunc.Controls.Add(this.buttonMakeOrder);
             this.groupBoxFunc.Controls.Add(this.buttonUsedMateials);
             this.groupBoxFunc.Controls.Add(this.buttonUsing);
@@ -69,6 +69,16 @@
             this.groupBoxFunc.TabIndex = 0;
             this.groupBoxFunc.TabStop = false;
             this.groupBoxFunc.Text = "Функции";
+            // 
+            // ButtonLoadOut
+            // 
+            this.ButtonLoadOut.Location = new System.Drawing.Point(6, 150);
+            this.ButtonLoadOut.Name = "ButtonLoadOut";
+            this.ButtonLoadOut.Size = new System.Drawing.Size(165, 55);
+            this.ButtonLoadOut.TabIndex = 12;
+            this.ButtonLoadOut.Text = "Списать позиции";
+            this.ButtonLoadOut.UseVisualStyleBackColor = true;
+            this.ButtonLoadOut.Click += new System.EventHandler(this.ButtonLoadOut_Click);
             // 
             // buttonMakeOrder
             // 
@@ -112,7 +122,7 @@
             // 
             // buttonShake
             // 
-            this.buttonShake.Location = new System.Drawing.Point(177, 28);
+            this.buttonShake.Location = new System.Drawing.Point(177, 89);
             this.buttonShake.Name = "buttonShake";
             this.buttonShake.Size = new System.Drawing.Size(193, 55);
             this.buttonShake.TabIndex = 6;
@@ -122,7 +132,7 @@
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(177, 89);
+            this.buttonImport.Location = new System.Drawing.Point(177, 29);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(193, 55);
             this.buttonImport.TabIndex = 5;
@@ -210,28 +220,6 @@
             this.ButtonStocks.UseVisualStyleBackColor = true;
             this.ButtonStocks.Click += new System.EventHandler(this.ButtonStocks_Click);
             // 
-            // buttonDeleteData
-            // 
-            this.buttonDeleteData.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonDeleteData.Location = new System.Drawing.Point(1014, 414);
-            this.buttonDeleteData.Name = "buttonDeleteData";
-            this.buttonDeleteData.Size = new System.Drawing.Size(77, 26);
-            this.buttonDeleteData.TabIndex = 8;
-            this.buttonDeleteData.Text = "Удалить ";
-            this.buttonDeleteData.UseVisualStyleBackColor = true;
-            this.buttonDeleteData.Visible = false;
-            // 
-            // buttonSaveData
-            // 
-            this.buttonSaveData.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonSaveData.Location = new System.Drawing.Point(1092, 414);
-            this.buttonSaveData.Name = "buttonSaveData";
-            this.buttonSaveData.Size = new System.Drawing.Size(92, 26);
-            this.buttonSaveData.TabIndex = 9;
-            this.buttonSaveData.Text = "Сохранить";
-            this.buttonSaveData.UseVisualStyleBackColor = true;
-            this.buttonSaveData.Visible = false;
-            // 
             // groupBoxWatch
             // 
             this.groupBoxWatch.Controls.Add(this.buttonCustoms);
@@ -276,8 +264,6 @@
             this.Controls.Add(this.labelNameTable);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBoxWatch);
-            this.Controls.Add(this.buttonDeleteData);
-            this.Controls.Add(this.buttonSaveData);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBoxFunc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -305,14 +291,13 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button ButtonStocks;
         private System.Windows.Forms.Button buttonManageFactory;
-        private System.Windows.Forms.Button buttonDeleteData;
-        private System.Windows.Forms.Button buttonSaveData;
         private System.Windows.Forms.GroupBox groupBoxWatch;
         private System.Windows.Forms.Button buttonUsedMateials;
         private System.Windows.Forms.Button buttonUsing;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelNameTable;
         private System.Windows.Forms.Button buttonMakeOrder;
+        private System.Windows.Forms.Button ButtonLoadOut;
     }
 }
 
