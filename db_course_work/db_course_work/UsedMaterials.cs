@@ -59,6 +59,7 @@ namespace db_course_work
             }
             catch (MySqlException ex)
             {
+                ButtonLoadOut.Enabled = false;
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InvalidOperationException)
@@ -66,14 +67,16 @@ namespace db_course_work
                 MessageBox.Show("В таблице \"Заказы\" отсутствуют заказы.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 numericUpDownOrderID.Enabled = false;
                 buttonShow.Enabled = false;
+                ButtonLoadOut.Enabled = false;
             }
 
 
         }
 
+        UsingInfo info = new UsingInfo();
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            var info = new UsingInfo();
+            ButtonLoadOut.Enabled = true;
 
             int amount = 0;
 
@@ -151,7 +154,7 @@ namespace db_course_work
                 {
                     if (i != info.IdOfUsedMaterials.Count - 1)
                     {
-                        StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, info.IdOfUsedMaterials[i], (Convert.ToInt32(info.AmountMaterials[i]) * amount).ToString());  
+                        StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, info.IdOfUsedMaterials[i], (Convert.ToInt32(info.AmountMaterials[i]) * amount).ToString());
                     }
                     else
                         StatUsingGrid.Rows.Add(i + 1, numericUpDownOrderID.Value, info.IdOfUsedMaterials[i], info.AmountMaterials[i]);
@@ -160,8 +163,108 @@ namespace db_course_work
             }
             else
             {
+                ButtonLoadOut.Enabled = false;
                 MessageBox.Show("Указан некорректный ID заказа. Доступные для просмотра отчета заказы указаны в таблице.", "Ошибка",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ButtonLoadOut_Click(object sender, EventArgs e)
+        {
+            db.OpenConnection();
+
+            int currentMatID = 0;
+            int amount = 0;
+            int countRedCells = 0;
+
+            List<int> amountOnStorage = new List<int>();
+
+            try
+            {
+                for (int i = 0; i < StatUsingGrid.RowCount - 1; i++)
+                {
+                    currentMatID = Convert.ToInt32(StatUsingGrid["Used_Materials", i].Value);
+                    amount = Convert.ToInt32(StatUsingGrid["Amount", i].Value);
+
+                    command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @matid");
+                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = currentMatID;
+                    command.Connection = db.GetConnection();
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        amountOnStorage.Add(Convert.ToInt32(reader["Cont_amount"]));
+                    }
+                    reader.Close();
+
+                    #region Проверка наличия заказанного материала на складах и списание
+
+                    for (int j = 0; j < amountOnStorage.Count; j++)
+                    {
+                        if (amountOnStorage[j] >= amount)
+                        {
+                            command = new MySqlCommand("UPDATE contains SET Cont_amount = @newCont WHERE Mat_ID = @matid AND St_ID = @st", db.GetConnection());
+                            command.Parameters.Add("@newCont", MySqlDbType.Int32).Value = amountOnStorage[j] - amount;
+                            command.Parameters.Add("@st", MySqlDbType.Int32).Value = j + 1;
+                            command.Parameters.Add("@matid", MySqlDbType.Int32).Value = currentMatID;
+                            command.Connection = db.GetConnection();
+                            command.ExecuteNonQuery();
+                            amount = 0;
+
+                        }
+                        else
+                        {
+                            command = new MySqlCommand("UPDATE contains SET Cont_amount = @newCont WHERE Mat_ID = @matid AND St_ID = @st", db.GetConnection());
+                            command.Parameters.Add("@newCont", MySqlDbType.Int32).Value = 0;
+                            command.Parameters.Add("@st", MySqlDbType.Int32).Value = j + 1;
+                            command.Parameters.Add("@matid", MySqlDbType.Int32).Value = currentMatID;
+                            amount -= amountOnStorage[j];
+                            command.Connection = db.GetConnection();
+                            command.ExecuteNonQuery();
+                        }
+                        if (amount == 0)
+                        {
+                            StatUsingGrid["Amount", i].Style.BackColor = Color.GreenYellow;
+                            break;
+                        }
+                        if (amount != 0 && j == amountOnStorage.Count - 1)
+                        {
+                            StatUsingGrid["Amount", i].Style.BackColor = Color.Red;
+                            countRedCells++;
+                        }
+
+                    }
+                    amountOnStorage.Clear();
+                    #endregion
+
+                }
+                if (countRedCells == 0)
+                {
+                    int haveAmountMat = 0;
+                    command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @matid AND St_ID = 1");
+                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = StatUsingGrid["Used_Materials", Convert.ToInt32(info.AmountMaterials.Last())].Value;
+                    command.Connection = db.GetConnection();
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        haveAmountMat = Convert.ToInt32(reader["Cont_amount"]);
+                    }
+                    reader.Close();
+
+                    amount = Convert.ToInt32(StatUsingGrid["Amount", Convert.ToInt32(info.AmountMaterials.Last())].Value);
+                    command = new MySqlCommand("UPDATE contains SET Cont_amount = @newCont WHERE Mat_ID = @matid AND St_ID = @st", db.GetConnection());
+                    command.Parameters.Add("@newCont", MySqlDbType.Int32).Value = haveAmountMat + amount;
+                    command.Parameters.Add("@st", MySqlDbType.Int32).Value = 1;
+                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = StatUsingGrid["Used_Materials", Convert.ToInt32(info.AmountMaterials.Last())].Value;
+                    command.Connection = db.GetConnection();
+                    command.ExecuteNonQuery();
+
+                }
+                db.CloseConnection();
+            }
+            catch (MySqlException ex)
+            {
+                ButtonLoadOut.Enabled = false;
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

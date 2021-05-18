@@ -36,6 +36,7 @@
             this.buttonShow = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDownOrderID = new System.Windows.Forms.NumericUpDown();
+            this.ButtonLoadOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.StatUsingGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOrderID)).BeginInit();
@@ -133,11 +134,24 @@
             0,
             0});
             // 
+            // ButtonLoadOut
+            // 
+            this.ButtonLoadOut.Enabled = false;
+            this.ButtonLoadOut.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
+            this.ButtonLoadOut.Location = new System.Drawing.Point(267, 56);
+            this.ButtonLoadOut.Name = "ButtonLoadOut";
+            this.ButtonLoadOut.Size = new System.Drawing.Size(120, 30);
+            this.ButtonLoadOut.TabIndex = 30;
+            this.ButtonLoadOut.Text = "Списать";
+            this.ButtonLoadOut.UseVisualStyleBackColor = true;
+            this.ButtonLoadOut.Click += new System.EventHandler(this.ButtonLoadOut_Click);
+            // 
             // UsedMaterials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 626);
+            this.Controls.Add(this.ButtonLoadOut);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.StatUsingGrid);
             this.Controls.Add(this.label3);
@@ -168,5 +182,6 @@
         private System.Windows.Forms.Button buttonShow;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDownOrderID;
+        private System.Windows.Forms.Button ButtonLoadOut;
     }
 }

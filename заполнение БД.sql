@@ -47,7 +47,7 @@ INSERT INTO technological_map VALUES (3, 'Производство шланга'
 INSERT INTO technological_map VALUES (4, 'Производство корпуса');
 
 -- состав тех.карты
-INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Next_oper_ID, Map_ID, Fact_ID) VALUES (0, 'Сборка пылесоса', 2, 25, 0, 60);
+INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Next_oper_ID, Map_ID, Fact_ID) VALUES (0, 'Сборка пылесоса', 25, 2, 0, 60);
 INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (1, 'Подключение пылесоса', 25, 0, 61);
 INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (2, 'Сборка эл.оборудования', 30, 1, 40);
 INSERT INTO comp_map (Oper_ID, Oper_desc, Oper_time, Map_ID, Fact_ID) VALUES (3, 'Сборка фильтра', 30, 2, 50);

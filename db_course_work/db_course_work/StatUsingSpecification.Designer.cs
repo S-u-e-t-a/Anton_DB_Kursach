@@ -37,6 +37,7 @@
             this.StatUsingGrid = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxType = new System.Windows.Forms.ComboBox();
+            this.ButtonLoadOutTime = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOrderID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatUsingGrid)).BeginInit();
@@ -146,11 +147,24 @@
             this.comboBoxType.Size = new System.Drawing.Size(351, 30);
             this.comboBoxType.TabIndex = 21;
             // 
+            // ButtonLoadOutTime
+            // 
+            this.ButtonLoadOutTime.Enabled = false;
+            this.ButtonLoadOutTime.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
+            this.ButtonLoadOutTime.Location = new System.Drawing.Point(640, 70);
+            this.ButtonLoadOutTime.Name = "ButtonLoadOutTime";
+            this.ButtonLoadOutTime.Size = new System.Drawing.Size(120, 30);
+            this.ButtonLoadOutTime.TabIndex = 22;
+            this.ButtonLoadOutTime.Text = "Списать";
+            this.ButtonLoadOutTime.UseVisualStyleBackColor = true;
+            this.ButtonLoadOutTime.Click += new System.EventHandler(this.ButtonLoadOutTime_Click);
+            // 
             // StatUsingSpecification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 628);
+            this.Controls.Add(this.ButtonLoadOutTime);
             this.Controls.Add(this.comboBoxType);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.StatUsingGrid);
@@ -183,5 +197,6 @@
         private System.Windows.Forms.DataGridView StatUsingGrid;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxType;
+        private System.Windows.Forms.Button ButtonLoadOutTime;
     }
 }
