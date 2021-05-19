@@ -171,6 +171,7 @@ namespace db_course_work
 
         private void ButtonLoadOut_Click(object sender, EventArgs e)
         {
+            ButtonLoadOut.Enabled = false;
             db.OpenConnection();
 
             int currentMatID = 0;

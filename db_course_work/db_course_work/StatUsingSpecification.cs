@@ -176,7 +176,7 @@ namespace db_course_work
                     StatUsingGrid.Columns.Add("Step", "Номер шага");
                     StatUsingGrid.Columns.Add("Cus_ID", "ID заказа"); StatUsingGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                     StatUsingGrid.Columns.Add("Used_Oper", "Использованные операции");
-                    StatUsingGrid.Columns.Add("Used_Time", "Затраченное время (план)");
+                    StatUsingGrid.Columns.Add("Used_Time", "Необходимое время");
                     StatUsingGrid.Columns.Add("Used_FactoryPlan", "Использованные РЦ (план)");
                     StatUsingGrid.Columns.Add("Used_FactoryFact", "Использованные РЦ (факт)");
 
@@ -200,6 +200,7 @@ namespace db_course_work
 
         private void ButtonLoadOutTime_Click(object sender, EventArgs e)
         {
+            ButtonLoadOutTime.Enabled = false;
             db.OpenConnection();
 
             int currentFactoryID = 0;
@@ -207,63 +208,17 @@ namespace db_course_work
             int EnableTimeOnFactory = 0;
             int IDGroup = 0;
             int IDFactoryInGroup = 0;
-
-            try
+            if (comboBoxType.Text == "Операции, затраченное время и РЦ")
             {
-                for (int i = 0; i < StatUsingGrid.RowCount; i++)
+                try
                 {
-                    currentFactoryID = Convert.ToInt32(StatUsingGrid["Used_FactoryPlan", i].Value);
-                    time = Convert.ToInt32(StatUsingGrid["Used_Time", i].Value);
-
-                    command = new MySqlCommand("SELECT Fact_time FROM factory WHERE Fact_ID = @factID");
-                    command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
-                    command.Connection = db.GetConnection();
-                    reader = command.ExecuteReader();
-                    while (reader.Read())
+                    for (int i = 0; i < StatUsingGrid.RowCount; i++)
                     {
-                        EnableTimeOnFactory = (Convert.ToInt32(reader["Fact_time"]));
-                    }
-                    reader.Close();
-
-                    #region Проверка доступного времени и вычитание
-
-                    if (EnableTimeOnFactory >= time)
-                    {
-                        command = new MySqlCommand("UPDATE factory SET Fact_time = @newTime WHERE Fact_ID = @factID", db.GetConnection());
-                        command.Parameters.Add("@newTime", MySqlDbType.Int32).Value = EnableTimeOnFactory - time;
-                        command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
-                        command.Connection = db.GetConnection();
-                        command.ExecuteNonQuery();
-                        time = 0;
-                        StatUsingGrid["Used_FactoryFact", i].Value = currentFactoryID;
-                        StatUsingGrid["Used_FactoryFact", i].Style.BackColor = Color.GreenYellow;
-                    }
-                    else
-                    {
-                        command = new MySqlCommand("SELECT Gr_ID FROM group_change WHERE Fact_ID = @factID");
-                        command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
-                        command.Connection = db.GetConnection();
-                        reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            IDGroup = (Convert.ToInt32(reader["Gr_ID"]));
-                        }
-                        reader.Close();
-
-                        
-                        command = new MySqlCommand("SELECT Fact_ID FROM group_change WHERE Gr_ID = @grID AND Fact_ID <> @factID");
-                        command.Parameters.Add("@grID", MySqlDbType.Int32).Value = IDGroup;
-                        command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
-                        command.Connection = db.GetConnection();
-                        reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            IDFactoryInGroup = (Convert.ToInt32(reader["Fact_ID"]));
-                        }
-                        reader.Close();
+                        currentFactoryID = Convert.ToInt32(StatUsingGrid["Used_FactoryPlan", i].Value);
+                        time = Convert.ToInt32(StatUsingGrid["Used_Time", i].Value);
 
                         command = new MySqlCommand("SELECT Fact_time FROM factory WHERE Fact_ID = @factID");
-                        command.Parameters.Add("@factID", MySqlDbType.Int32).Value = IDFactoryInGroup;
+                        command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
                         command.Connection = db.GetConnection();
                         reader = command.ExecuteReader();
                         while (reader.Read())
@@ -272,25 +227,73 @@ namespace db_course_work
                         }
                         reader.Close();
 
-                        command = new MySqlCommand("UPDATE factory SET Fact_time = @newTime WHERE Fact_ID = @factID", db.GetConnection());
-                        command.Parameters.Add("@newTime", MySqlDbType.Int32).Value = EnableTimeOnFactory - time;
-                        command.Parameters.Add("@factID", MySqlDbType.Int32).Value = IDFactoryInGroup;
-                        command.Connection = db.GetConnection();
-                        command.ExecuteNonQuery();
-                        time = 0;
-                        StatUsingGrid["Used_FactoryFact", i].Value = IDFactoryInGroup;
-                        StatUsingGrid["Used_FactoryFact", i].Style.BackColor = Color.Yellow;
-                    }
-                    #endregion
+                        #region Проверка доступного времени и вычитание
 
+                        if (EnableTimeOnFactory >= time)
+                        {
+                            command = new MySqlCommand("UPDATE factory SET Fact_time = @newTime WHERE Fact_ID = @factID", db.GetConnection());
+                            command.Parameters.Add("@newTime", MySqlDbType.Int32).Value = EnableTimeOnFactory - time;
+                            command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
+                            command.Connection = db.GetConnection();
+                            command.ExecuteNonQuery();
+                            time = 0;
+                            StatUsingGrid["Used_FactoryFact", i].Value = currentFactoryID;
+                            StatUsingGrid["Used_FactoryFact", i].Style.BackColor = Color.GreenYellow;
+                        }
+                        else
+                        {
+                            command = new MySqlCommand("SELECT Gr_ID FROM group_change WHERE Fact_ID = @factID");
+                            command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
+                            command.Connection = db.GetConnection();
+                            reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                IDGroup = (Convert.ToInt32(reader["Gr_ID"]));
+                            }
+                            reader.Close();
+
+
+                            command = new MySqlCommand("SELECT Fact_ID FROM group_change WHERE Gr_ID = @grID AND Fact_ID <> @factID");
+                            command.Parameters.Add("@grID", MySqlDbType.Int32).Value = IDGroup;
+                            command.Parameters.Add("@factID", MySqlDbType.Int32).Value = currentFactoryID;
+                            command.Connection = db.GetConnection();
+                            reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                IDFactoryInGroup = (Convert.ToInt32(reader["Fact_ID"]));
+                            }
+                            reader.Close();
+
+                            command = new MySqlCommand("SELECT Fact_time FROM factory WHERE Fact_ID = @factID");
+                            command.Parameters.Add("@factID", MySqlDbType.Int32).Value = IDFactoryInGroup;
+                            command.Connection = db.GetConnection();
+                            reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                EnableTimeOnFactory = (Convert.ToInt32(reader["Fact_time"]));
+                            }
+                            reader.Close();
+
+                            command = new MySqlCommand("UPDATE factory SET Fact_time = @newTime WHERE Fact_ID = @factID", db.GetConnection());
+                            command.Parameters.Add("@newTime", MySqlDbType.Int32).Value = EnableTimeOnFactory - time;
+                            command.Parameters.Add("@factID", MySqlDbType.Int32).Value = IDFactoryInGroup;
+                            command.Connection = db.GetConnection();
+                            command.ExecuteNonQuery();
+                            time = 0;
+                            StatUsingGrid["Used_FactoryFact", i].Value = IDFactoryInGroup;
+                            StatUsingGrid["Used_FactoryFact", i].Style.BackColor = Color.Yellow;
+                        }
+                        #endregion
+
+                    }
+
+                    db.CloseConnection();
                 }
-               
-                db.CloseConnection();
-            }
-            catch (MySqlException ex)
-            {
-                ButtonLoadOutTime.Enabled = false;
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (MySqlException ex)
+                {
+                    ButtonLoadOutTime.Enabled = false;
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
