@@ -242,7 +242,7 @@ namespace db_course_work
                 {
                     int haveAmountMat = 0;
                     command = new MySqlCommand("SELECT Cont_amount FROM contains WHERE Mat_ID = @matid AND St_ID = 1");
-                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = StatUsingGrid["Used_Materials", Convert.ToInt32(info.AmountMaterials.Last())].Value;
+                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = StatUsingGrid["Used_Materials", Convert.ToInt32(info.AmountMaterials.Count - 1)].Value;
                     command.Connection = db.GetConnection();
                     reader = command.ExecuteReader();
                     while (reader.Read())
@@ -251,11 +251,11 @@ namespace db_course_work
                     }
                     reader.Close();
 
-                    amount = Convert.ToInt32(StatUsingGrid["Amount", Convert.ToInt32(info.AmountMaterials.Last())].Value);
+                    amount = Convert.ToInt32(StatUsingGrid["Amount", Convert.ToInt32(info.AmountMaterials.Count - 1)].Value);
                     command = new MySqlCommand("UPDATE contains SET Cont_amount = @newCont WHERE Mat_ID = @matid AND St_ID = @st", db.GetConnection());
                     command.Parameters.Add("@newCont", MySqlDbType.Int32).Value = haveAmountMat + amount;
                     command.Parameters.Add("@st", MySqlDbType.Int32).Value = 1;
-                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = StatUsingGrid["Used_Materials", Convert.ToInt32(info.AmountMaterials.Last())].Value;
+                    command.Parameters.Add("@matid", MySqlDbType.Int32).Value = StatUsingGrid["Used_Materials", Convert.ToInt32(info.AmountMaterials.Count - 1)].Value;
                     command.Connection = db.GetConnection();
                     command.ExecuteNonQuery();
 

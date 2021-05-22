@@ -84,7 +84,7 @@
             this.numericUpDownTime.Font = new System.Drawing.Font("Noto Sans Cond", 12F, System.Drawing.FontStyle.Bold);
             this.numericUpDownTime.Location = new System.Drawing.Point(40, 149);
             this.numericUpDownTime.Maximum = new decimal(new int[] {
-            24,
+            1440,
             0,
             0,
             0});
